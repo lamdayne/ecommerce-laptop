@@ -20,6 +20,7 @@ public class CreateUserRequest {
     @Size(min = 8, message = "INVALID_PASSWORD")
     private String password;
 
+    @NotBlank(message = "EMAIL_BLANK")
     private String email;
 
     @Size(min = 10, message = "INVALID_PHONE")
