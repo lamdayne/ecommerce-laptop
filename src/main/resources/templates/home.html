@@ -1,76 +1,192 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Trang chủ</title>
+    <meta charset="UTF-8">
+    <title>Trang chủ</title>
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css"
+            rel="stylesheet"
+    />
 
-  <!-- CSS -->
-  <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
 <!-- HEADER -->
 <nav class="navbar navbar-expand-lg bg-white shadow-sm">
-  <div class="container">
+    <div class="container">
 
-    <a class="navbar-brand fw-bold text-primary" href="/">pro</a>
+        <a class="navbar-brand fw-bold text-primary" href="/">LABPRO</a>
 
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="menu">
+        <div class="collapse navbar-collapse" id="menu">
 
-      <ul class="navbar-nav me-3">
-        <li class="nav-item">
-          <a class="nav-link fw-semibold">Sản phẩm</a>
-        </li>
-      </ul>
+            <div class="dropdown">
+                <a class="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sản Phẩm
+                </a>
 
-      <form class="d-flex flex-grow-1 me-3">
-        <input class="form-control rounded-pill" placeholder="Xin chào, bạn đang tìm gì?">
-      </form>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Laptop</a></li>
+                    <li><a class="dropdown-item" href="#">Bàn phím, Chuột</a></li>
+                    <li><a class="dropdown-item" href="#">Ghế công thái học, Bàn nâng hạ</a></li>
+                    <li><a class="dropdown-item" href="#">Thực tế ảo / Game Console</a></li>
+                    <li><a class="dropdown-item" href="#">Arm màn hình, Màn hình</a></li>
+                    <li><a class="dropdown-item" href="#">RAM, Ổ cứng</a></li>
+                    <li><a class="dropdown-item" href="#">Phụ kiện Setup</a></li>
+                    <li><a class="dropdown-item" href="#">Hộc tủ</a></li>
+                    <li><a class="dropdown-item" href="#">Cổng chuyển, Sạc</a></li>
+                    <li><a class="dropdown-item" href="#">Balo</a></li>
 
-      <a class="btn btn-outline-dark me-2">Đăng nhập</a>
+                </ul>
+            </div>
 
-      <a class="btn btn-success rounded-pill">🛒 0 ₫</a>
+            <form class="d-flex flex-grow-1 mx-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Xin chào, Bạn đang tìm gì?" aria-label="Search"/>
+                <button class="btn btn-outline-success col-3" type="submit"><i class="ri-search-2-line"></i> Search</button>
+            </form>
+
+            <div class="ms-auto d-flex align-items-center">
+            <a class="btn btn-outline-dark me-2"><i class="ri-account-circle-line"></i>  Đăng nhập</a>
+
+            <a class="btn btn-success rounded-pill">
+                <i class="ri-shopping-cart-line"></i>
+            </a>
+                </div>
+        </div>
     </div>
-  </div>
 </nav>
 
 <!-- BANNER -->
 <div class="container mt-4">
 
-  <div id="mainBanner" class="carousel slide" data-bs-ride="carousel">
+    <div id="mainBanner" class="carousel slide" data-bs-ride="carousel">
 
-    <div class="carousel-inner rounded-4">
+        <div class="carousel-inner rounded-4">
 
-      <div class="carousel-item active position-relative">
-        <img src="/images/banner1.jpg" class="d-block w-100">
+            <div class="carousel-item active position-relative">
+                <img src="/images/banner1.jpg" class="img-size d-block w-100">
+            </div>
 
+            <div class="carousel-item">
+                <img src="/images/banner2.jpg" class="img-size d-block w-100">
+            </div>
 
-      </div>
+        </div>
 
-      <div class="carousel-item">
-        <img src="/images/banner2.jpg" class="d-block w-100">
-      </div>
+        <button class="carousel-control-prev" data-bs-target="#mainBanner" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" data-bs-target="#mainBanner" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
 
     </div>
 
-    <button class="carousel-control-prev" data-bs-target="#mainBanner" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-
-    <button class="carousel-control-next" data-bs-target="#mainBanner" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
-
-  </div>
-
 </div>
+
+<!-- DANH MỤC NỔI BẬT -->
+<div class="container my-5">
+
+    <h3 class="fw-bold mb-4">Danh mục nổi bật</h3>
+
+    <div class="row row-cols-8 row-cols-md-8 row-cols-lg-8 g-4 text-center">
+
+        <!-- Item -->
+        <div class="col">
+            <a href="#" class="category-item text-decoration-none text-dark">
+                <div class="category-box">
+                    <img src="/images/categories/laptop-nhap-khau-khong-nen.jpg" class="img-fluid mb-2" />
+
+                </div>
+                <p class="fw-semibold small">Laptop nhập khẩu</p>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="#" class="category-item text-decoration-none text-dark">
+                <div class="category-box">
+                    <img src="/images/categories/laptop-chinh-hang-khong-nen.jpg" class="img-fluid mb-2" />
+                </div>
+
+                <p class="fw-semibold small">Laptop chính hãng</p>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="#" class="category-item text-decoration-none text-dark">
+                <div class="category-box">
+                    <img src="/images/categories/man-hinh-di-dong-ao.jpg" class="img-fluid mb-2" />
+                </div>
+
+                <p class="fw-semibold small">Màn hình di động</p>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="#" class="category-item text-decoration-none text-dark">
+                <div class="category-box">
+                    <img src="/images/categories/danh-muc-icon-may-choi-game-game-console-thinkpro.vn.jpg" class="img-fluid mb-2" />
+                </div>
+
+                <p class="fw-semibold small ">
+                    Máy chơi game/<br>Game Console
+                </p>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="#" class="category-item text-decoration-none text-dark">
+                <div class="category-box">
+                    <img src="/images/categories/danh-muc-icon-kinh-thuc-te-ao-vrar-thinkpro.vn.jpg" class="img-fluid mb-2" />
+
+                </div>
+
+                <p class="fw-semibold small">Kính Thực Tế Ảo<br>VR/AR</p>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="#" class="category-item text-decoration-none text-dark">
+                <div class="category-box">
+                    <img src="/images/categories/danh-muc-icon-ban-phim-thinkpro.vn.jpg" class="img-fluid mb-2" />
+
+                </div>
+                <p class="fw-semibold small">Bàn phím</p>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="#" class="category-item text-decoration-none text-dark">
+                <div class="category-box">
+                    <img src="/images/categories/chuot.jpg" class="img-fluid mb-2" />
+
+                </div>
+                <p class="fw-semibold small">Chuột</p>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="#" class="category-item text-decoration-none text-dark">
+                <div class="category-box">
+                    <img src="/images/categories/danh-muc-icon-balo-tui-thinkpro.vn.jpg" class="img-fluid mb-2" />
+
+                </div>
+                <p class="fw-semibold small">Balo, Túi</p>
+            </a>
+        </div>
+
+    </div>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

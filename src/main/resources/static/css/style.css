@@ -5,3 +5,31 @@ body {
 h1 {
     color: red;
 }
+img {
+    transition: transform 0.2s ease;
+}
+
+.img-size {
+    height: 250px;        /* chiều cao cố định */
+    /*object-fit: cover;   !* cắt ảnh cho vừa khung *!*/
+}
+
+a:hover img {
+    transform: scale(1.05);
+
+}
+.category-item:hover p {
+    color: black; /* xanh bootstrap */
+}
+
+.category-box {
+    background-color: #f5f5f5;
+    border-radius: 16px;
+    padding: 16px;
+    transition: background-color 0.25s ease;
+}
+
+/* Hover effect */
+.category-item:hover .category-box {
+    background-color: #3ddc97; /* xanh giống ảnh */
+}
