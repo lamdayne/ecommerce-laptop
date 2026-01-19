@@ -14,7 +14,6 @@ import java.util.Date;
 public class UserResponse {
     private String id;
     private String fullName;
-    private String password;
     private String email;
     private String phone;
     private Date dob;
