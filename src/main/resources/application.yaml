@@ -1,8 +1,13 @@
 
 spring:
   datasource:
-    url: "jdbc:mysql://localhost:3305/ecommerce_laptop"
-    username: root
-    password: lamdayne
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     show-sql: true
+
+cloudinary:
+  cloud_name: ${CLOUD_NAME_CLOUDINARY}
+  api_key: ${API_KEY_CLOUDINARY}
+  api_secret: ${API_SECRET_CLOUDINARY}
