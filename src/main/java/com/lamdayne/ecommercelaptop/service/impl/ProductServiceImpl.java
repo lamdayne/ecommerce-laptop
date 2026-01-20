@@ -87,4 +87,9 @@ public class ProductServiceImpl implements ProductService {
         product.setThumbnail(uploadImageFileService.uploadImageFile(file));
         return productMapper.toProductResponse(productRepository.save(product));
     }
+
+    @Override
+    public List<ProductResponse> getAllProductsByCategoryId(Integer categoryId) {
+        return productMapper.toProductResponse(productRepository.getAllProductsByCategoryId(categoryId));
+    }
 }
