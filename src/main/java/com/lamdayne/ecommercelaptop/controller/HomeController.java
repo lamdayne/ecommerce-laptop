@@ -1,6 +1,7 @@
 package com.lamdayne.ecommercelaptop.controller;
 
 
+import com.lamdayne.ecommercelaptop.entity.Product;
 import com.lamdayne.ecommercelaptop.repository.CategoryRepository;
 import com.lamdayne.ecommercelaptop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class HomeController {
                 products = productRepository.findByCategory_Id(categoryId);
             }
 
-        model.addAttribute("products",productRepository.findByStatus(1)) ;
+        model.addAttribute("products",productRepository.findByStatus(0)) ;
         model.addAttribute("categories",categoryRepository.findAll());
             model.addAttribute("activeCategory", categoryId);
 
