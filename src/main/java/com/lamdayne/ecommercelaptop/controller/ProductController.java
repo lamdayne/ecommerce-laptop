@@ -63,4 +63,11 @@ public class ProductController {
                 .data(productService.getAllProducts())
                 .build();
     }
+
+    @GetMapping("/search")
+    public ApiResponse<List<ProductResponse>> getAllProductsByCategoryId(@RequestParam Integer categoryId) {
+        return ApiResponse.<List<ProductResponse>>builder()
+                .data(productService.getAllProductsByCategoryId(categoryId))
+                .build();
+    }
 }
