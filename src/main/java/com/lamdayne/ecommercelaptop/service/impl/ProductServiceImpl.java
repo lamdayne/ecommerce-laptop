@@ -11,7 +11,6 @@ import com.lamdayne.ecommercelaptop.exception.ErrorCode;
 import com.lamdayne.ecommercelaptop.mapper.ProductMapper;
 import com.lamdayne.ecommercelaptop.repository.BrandRepository;
 import com.lamdayne.ecommercelaptop.repository.CategoryRepository;
-import com.lamdayne.ecommercelaptop.repository.ProductRepository;
 import com.lamdayne.ecommercelaptop.service.ProductService;
 import com.lamdayne.ecommercelaptop.service.UploadImageFileService;
 import lombok.RequiredArgsConstructor;
