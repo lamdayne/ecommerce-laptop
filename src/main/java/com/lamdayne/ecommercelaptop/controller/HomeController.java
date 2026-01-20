@@ -27,8 +27,7 @@ private final CategoryService categoryService;
             if (categoryId == null) {
                 products = productService.getAllProducts();
             } else {
-                products = productService
-                        .get
+                products = productService.getAllProductsByCategoryId(categoryId);
             }
 
         model.addAttribute("products",productService.getAllProducts()) ;

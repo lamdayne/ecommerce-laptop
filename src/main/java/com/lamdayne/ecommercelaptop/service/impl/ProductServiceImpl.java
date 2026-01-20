@@ -11,6 +11,7 @@ import com.lamdayne.ecommercelaptop.exception.ErrorCode;
 import com.lamdayne.ecommercelaptop.mapper.ProductMapper;
 import com.lamdayne.ecommercelaptop.repository.BrandRepository;
 import com.lamdayne.ecommercelaptop.repository.CategoryRepository;
+import com.lamdayne.ecommercelaptop.repository.ProductRepository;
 import com.lamdayne.ecommercelaptop.service.ProductService;
 import com.lamdayne.ecommercelaptop.service.UploadImageFileService;
 import lombok.RequiredArgsConstructor;
@@ -85,5 +86,10 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
         product.setThumbnail(uploadImageFileService.uploadImageFile(file));
         return productMapper.toProductResponse(productRepository.save(product));
+    }
+
+    @Override
+    public List<ProductResponse> getAllProductsByCategoryId(Integer categoryId) {
+        return productMapper.toProductResponse(productRepository.getAllProductsByCategoryId(categoryId));
     }
 }

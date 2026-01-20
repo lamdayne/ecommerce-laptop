@@ -2,6 +2,7 @@ package com.lamdayne.ecommercelaptop.service;
 
 import com.lamdayne.ecommercelaptop.dto.request.CreateProductRequest;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateProductRequest;
+import com.lamdayne.ecommercelaptop.dto.response.CategoryResponse;
 import com.lamdayne.ecommercelaptop.dto.response.ProductResponse;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,4 +16,5 @@ public interface ProductService {
     ProductResponse getProductById(String id);
     List<ProductResponse> getAllProducts();
     ProductResponse uploadImageProduct(String id, MultipartFile file) throws IOException;
+    List<ProductResponse> getAllProductsByCategoryId(Integer categoryId);
 }
