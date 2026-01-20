@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+<footer class="bg-dark text-light pt-5 mt-5">
+  <div class="container">
+    <div class="row">
+
+      <!-- Logo + mô tả -->
+      <div class="col-md-4 mb-4">
+        <h5 class="fw-bold text-uppercase">Laptop Store</h5>
+        <p class="text-muted">
+          Chuyên cung cấp laptop, bàn phím, phụ kiện chính hãng.
+          Giá tốt – bảo hành uy tín.
+        </p>
+      </div>
+
+      <!-- Danh mục -->
+      <div class="col-md-2 mb-4">
+        <h6 class="fw-bold">Danh mục</h6>
+        <ul class="list-unstyled">
+          <li><a href="/products?category=1" class="footer-link">Laptop</a></li>
+          <li><a href="/products?category=2" class="footer-link">Bàn phím</a></li>
+          <li><a href="#" class="footer-link">Chuột</a></li>
+          <li><a href="#" class="footer-link">Phụ kiện</a></li>
+        </ul>
+      </div>
+
+      <!-- Hỗ trợ -->
+      <div class="col-md-3 mb-4">
+        <h6 class="fw-bold">Hỗ trợ khách hàng</h6>
+        <ul class="list-unstyled">
+          <li><a href="#" class="footer-link">Chính sách bảo hành</a></li>
+          <li><a href="#" class="footer-link">Chính sách đổi trả</a></li>
+          <li><a href="#" class="footer-link">Hướng dẫn mua hàng</a></li>
+        </ul>
+      </div>
+
+      <!-- Liên hệ -->
+      <div class="col-md-3 mb-4">
+        <h6 class="fw-bold">Liên hệ</h6>
+        <p class="mb-1"><i class="bi bi-geo-alt"></i> Hồ Chí Minh, Việt Nam</p>
+        <p class="mb-1"><i class="bi bi-telephone"></i> 0123 456 789</p>
+        <p><i class="bi bi-envelope"></i> support@laptopstore.vn</p>
+      </div>
+
+    </div>
+
+    <hr class="border-secondary">
+
+    <div class="text-center pb-3">
+      <small class="text-muted">
+        © 2026 Laptop Store. All rights reserved.
+      </small>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
