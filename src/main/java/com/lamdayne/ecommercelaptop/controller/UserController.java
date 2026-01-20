@@ -4,11 +4,9 @@ import com.lamdayne.ecommercelaptop.dto.request.CreateUserRequest;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateUserRequest;
 import com.lamdayne.ecommercelaptop.dto.response.ApiResponse;
 import com.lamdayne.ecommercelaptop.dto.response.UserResponse;
-import com.lamdayne.ecommercelaptop.entity.User;
 import com.lamdayne.ecommercelaptop.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +19,10 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ApiResponse<List<UserResponse>> getAllUsers() {
+        return ApiResponse.<List<UserResponse>>builder()
+                .data(userService.getAllUsers())
+                .build();
     }
 
     @GetMapping("/{userId}")
@@ -40,14 +40,18 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable String userId, @RequestBody @Valid UpdateUserRequest request) {
-        return ResponseEntity.ok(userService.updateUser(userId, request));
+    public ApiResponse<UserResponse> updateUser(@PathVariable String userId, @RequestBody @Valid UpdateUserRequest request) {
+        return ApiResponse.<UserResponse>builder()
+                .data(userService.updateUser(userId, request))
+                .build();
     }
 
     @DeleteMapping("/{userId}")
-    public String deleteUserById(@PathVariable String userId) {
+    public ApiResponse<UserResponse> deleteUserById(@PathVariable String userId) {
         userService.deleteUser(userId);
-        return "User has been deleted";
+        return ApiResponse.<UserResponse>builder()
+                .message("User has been deleted")
+                .build();
     }
 
 }
