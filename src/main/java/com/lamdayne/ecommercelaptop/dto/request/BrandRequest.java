@@ -1,5 +1,6 @@
 package com.lamdayne.ecommercelaptop.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Builder
@@ -8,5 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BrandRequest {
+    @NotBlank(message = "BRAND_NAME_BLANK")
     private String name;
 }
