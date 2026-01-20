@@ -20,6 +20,14 @@ public enum ErrorCode {
     BRAND_NAME_BLANK(1013, "Brand name cannot blank"),
     BRAND_ALREADY_EXISTS(1014, "Brand cannot already exists"),
     BRAND_NOT_FOUND(1015, "Brand not found"),
+    PRODUCT_NOT_FOUND(1016, "Product not found"),
+    PRODUCT_NAME_BLANK(1017, "Product name cannot be blank"),
+    PRODUCT_PRICE_BLANK(1018, "Product price cannot be blank"),
+    PRODUCT_STOCK_BLANK(1019, "Product stock cannot be blank"),
+    PRODUCT_DESCRIPTION_BLANK(1020, "Product description cannot be blank"),
+    PRODUCT_STATUS_BLANK(1021, "Product status cannot be blank"),
+    CATEGORY_ID_BLANK(1022, "Category ID cannot be blank"),
+    BRAND_ID_BLANK(1023, "Brand ID cannot be blank"),
     ;
     private int code;
     private String message;
