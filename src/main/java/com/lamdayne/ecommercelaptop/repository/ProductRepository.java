@@ -1,10 +1,9 @@
 package com.lamdayne.ecommercelaptop.repository;
 
-import com.lamdayne.ecommercelaptop.entity.Brand;
+import com.lamdayne.ecommercelaptop.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BrandRepository extends JpaRepository<Brand,Integer> {
-    boolean existsBrandByName(String name);
+public interface ProductRepository extends JpaRepository<Product, String> {
 }
