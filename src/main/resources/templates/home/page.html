@@ -20,7 +20,7 @@
 <nav class="navbar navbar-expand-lg bg-white shadow-sm">
     <div class="container">
 
-        <a class="navbar-brand fw-bold text-primary" href="/static">LAPTOP STORE</a>
+        <a class="navbar-brand fw-bold text-primary" href="/">LAPTOP STORE</a>
 
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
@@ -193,7 +193,7 @@
     <h2 class="title">Gợi ý cho bạn</h2>
 
     <div class="tabs">
-        <a th:href="@{/static}"
+        <a th:href="@{/}"
            class="tab"
            th:classappend="${activeCategory == null} ? 'active'">
             Tất cả
@@ -211,7 +211,8 @@
         <div class="product-card" th:each="p : ${products}">
             <img th:src="@{${p.thumbnail}}" alt="">
             <h3 th:text="${p.name}"></h3>
-            <p th:text="${p.salePrice} + ' đ'"></p>
+            <p th:text="${#numbers.formatDecimal(p.salePrice, 0, 'POINT', 0, 'COMMA')} + ' đ'"></p>
+            <p th:text="${p.description}"></p>
         </div>
     </div>
 </section>

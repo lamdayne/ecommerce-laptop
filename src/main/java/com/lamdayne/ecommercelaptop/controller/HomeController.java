@@ -1,7 +1,6 @@
 package com.lamdayne.ecommercelaptop.controller;
 
 
-import com.lamdayne.ecommercelaptop.entity.Product;
 import com.lamdayne.ecommercelaptop.repository.CategoryRepository;
 import com.lamdayne.ecommercelaptop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
