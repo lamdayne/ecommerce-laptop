@@ -4,6 +4,7 @@ import com.lamdayne.ecommercelaptop.dto.request.CategoryRequest;
 import com.lamdayne.ecommercelaptop.dto.response.ApiResponse;
 import com.lamdayne.ecommercelaptop.dto.response.CategoryResponse;
 import com.lamdayne.ecommercelaptop.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ApiResponse<CategoryResponse> createCategory(@RequestBody CategoryRequest categoryRequest) {
+    public ApiResponse<CategoryResponse> createCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
         return ApiResponse.<CategoryResponse>builder()
                 .message("Category created")
                 .data(categoryService.createCategory(categoryRequest))
@@ -25,7 +26,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{categoryId}")
-    public ApiResponse<CategoryResponse> updateCategory(@PathVariable int categoryId, @RequestBody CategoryRequest categoryRequest) {
+    public ApiResponse<CategoryResponse> updateCategory(@PathVariable int categoryId, @RequestBody @Valid CategoryRequest categoryRequest) {
         return ApiResponse.<CategoryResponse>builder()
                 .message("Category updated")
                 .data(categoryService.updateCategory(categoryId, categoryRequest))
