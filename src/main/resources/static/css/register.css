@@ -1,0 +1,38 @@
+body {
+    background: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card-register {
+    width: 100%;
+    max-width: 500px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+    background: #fff;
+}
+
+.card-header {
+    background: #0d6efd; /* Màu xanh Bootstrap */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
+
+.btn-register {
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 30px;
+}
