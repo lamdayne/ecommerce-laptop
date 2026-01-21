@@ -30,7 +30,7 @@ private final CategoryService categoryService;
                 products = productService.getAllProductsByCategoryId(categoryId);
             }
 
-        model.addAttribute("products",productService.getAllProducts()) ;
+        model.addAttribute("products", products) ;
         model.addAttribute("categories",categoryService.getAllCategories());
             model.addAttribute("activeCategory", categoryId);
 
