@@ -7,9 +7,12 @@ import com.lamdayne.ecommercelaptop.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     User toUser(CreateUserRequest request);
     UserResponse toUserResponse(User user);
     void updateUser(@MappingTarget User user, UpdateUserRequest request); // map value từ updateUserRequest vào user
+    List<UserResponse> toUserResponseList(List<User> users);
 }

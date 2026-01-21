@@ -7,6 +7,7 @@ import com.lamdayne.ecommercelaptop.dto.response.ProductResponse;
 import com.lamdayne.ecommercelaptop.entity.Product;
 import com.lamdayne.ecommercelaptop.service.ProductService;
 import com.lamdayne.ecommercelaptop.service.UploadImageFileService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +23,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ApiResponse<ProductResponse> createProduct(@RequestBody CreateProductRequest request) {
+    public ApiResponse<ProductResponse> createProduct(@RequestBody @Valid CreateProductRequest request) {
         return ApiResponse.<ProductResponse>builder()
                 .data(productService.createProduct(request))
                 .build();
@@ -36,7 +37,7 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    public ApiResponse<ProductResponse> updateProduct(@PathVariable String productId, @RequestBody UpdateProductRequest request) {
+    public ApiResponse<ProductResponse> updateProduct(@PathVariable String productId, @RequestBody @Valid UpdateProductRequest request) {
         return ApiResponse.<ProductResponse>builder()
                 .data(productService.updateProduct(productId, request))
                 .build();

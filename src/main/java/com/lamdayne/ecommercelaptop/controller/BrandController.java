@@ -5,6 +5,7 @@ import com.lamdayne.ecommercelaptop.dto.request.BrandRequest;
 import com.lamdayne.ecommercelaptop.dto.response.ApiResponse;
 import com.lamdayne.ecommercelaptop.dto.response.BrandResponse;
 import com.lamdayne.ecommercelaptop.service.BrandService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +21,7 @@ public class BrandController {
     private final BrandService brandService;
 
     @PostMapping
-    public ApiResponse<BrandResponse> createBrand(@RequestBody BrandRequest brandRequest) {
+    public ApiResponse<BrandResponse> createBrand(@RequestBody @Valid BrandRequest brandRequest) {
         return ApiResponse.<BrandResponse>builder()
                 .data(brandService.createBrand(brandRequest))
                 .build();
@@ -36,7 +37,7 @@ public class BrandController {
     }
 
     @PutMapping("/{brandId}")
-    public ApiResponse<BrandResponse> updateBrand(@PathVariable int brandId, @RequestBody BrandRequest brandRequest) {
+    public ApiResponse<BrandResponse> updateBrand(@PathVariable int brandId, @RequestBody @Valid BrandRequest brandRequest) {
         return ApiResponse.<BrandResponse>builder()
                 .data(brandService.updateBrand(brandId, brandRequest))
                 .build();
