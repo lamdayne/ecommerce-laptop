@@ -1,6 +1,7 @@
 package com.lamdayne.ecommercelaptop.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Builder
@@ -12,24 +13,24 @@ public class CreateProductRequest {
     @NotBlank(message = "PRODUCT_NAME_BLANK")
     private String name;
 
-    @NotBlank(message = "PRODUCT_PRICE_BLANK")
+    @NotNull(message = "PRODUCT_PRICE_NULL")
     private Double basePrice;
 
-    @NotBlank(message = "PRODUCT_PRICE_BLANK")
+    @NotNull(message = "PRODUCT_PRICE_NULL")
     private Double salePrice;
 
-    @NotBlank(message = "PRODUCT_STOCK_BLANK")
+    @NotNull(message = "PRODUCT_STOCK_NULL")
     private Long stock;
 
     @NotBlank(message = "PRODUCT_DESCRIPTION_BLANK")
     private String description;
 
-    @NotBlank(message = "PRODUCT_STATUS_BLANK")
+    @NotNull(message = "PRODUCT_STATUS_NULL")
     private int status;
 
-    @NotBlank(message = "CATEGORY_ID_BLANK")
+    @NotNull(message = "CATEGORY_ID_NULL")
     private int categoryId;
 
-    @NotBlank(message = "BRAND_ID_BLANK")
+    @NotNull(message = "BRAND_ID_NULL")
     private int brandId;
 }
