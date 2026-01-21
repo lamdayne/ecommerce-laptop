@@ -14,10 +14,10 @@ img {
     /*object-fit: cover;   !* cắt ảnh cho vừa khung *!*/
 }
 
-a:hover img {
-    transform: scale(1.05);
+/*a:hover img {*/
+/*    transform: scale(1.05);*/
+/*}*/
 
-}
 .category-item:hover p {
     color: black; /* xanh bootstrap */
 }
