@@ -1,0 +1,150 @@
+/* cart.css - Style riêng cho trang giỏ hàng */
+
+/* Tổng thể */
+.cart-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.cart-title {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.cart-title i {
+    color: #0d6efd;
+}
+
+/* Bảng giỏ hàng */
+.cart-table {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.cart-table th {
+    background: #0d6efd;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 1rem;
+}
+
+.cart-table td {
+    vertical-align: middle;
+    padding: 1.2rem 1rem;
+}
+
+.cart-item-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+.quantity-input {
+    max-width: 100px;
+    text-align: center;
+}
+
+/* Tổng kết */
+.total-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 1.8rem;
+}
+
+.total-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.total-item strong {
+    font-size: 1.4rem;
+}
+
+.total-amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #dc3545;
+}
+
+/* Nút hành động */
+.cart-actions .btn {
+    padding: 0.8rem 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.cart-actions .btn-outline-primary {
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+
+.cart-actions .btn-outline-primary:hover {
+    background: #0d6efd;
+    color: white;
+}
+
+.cart-actions .btn-success {
+    background: #198754;
+    border: none;
+}
+
+/* Giỏ trống */
+.empty-cart {
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 5rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.empty-cart-icon {
+    font-size: 8rem;
+    color: #adb5bd;
+    margin-bottom: 1.5rem;
+}
+
+.empty-cart h3 {
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.empty-cart p {
+    color: #868e96;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cart-table th, .cart-table td {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+
+    .cart-item-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .total-card {
+        padding: 1.2rem;
+    }
+
+    .total-amount {
+        font-size: 1.6rem;
+    }
+}
