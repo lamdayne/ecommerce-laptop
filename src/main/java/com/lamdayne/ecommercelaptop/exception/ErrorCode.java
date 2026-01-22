@@ -28,6 +28,10 @@ public enum ErrorCode {
     PRODUCT_STATUS_NULL(1021, "Product status cannot null"),
     CATEGORY_ID_NULL(1022, "Category ID cannot null"),
     BRAND_ID_NULL(1023, "Brand ID cannot null"),
+    CART_NOT_FOUND(1024, "Cart not found"),
+    CART_USER_ID_BLANK(1025, "User ID cannot be blank"),
+    CART_PRODUCT_ID_BLANK(1026, "Product ID cannot be blank"),
+    PRODUCT_QUANTITY_NULL(1027, "Product quantity cannot null"),
     ;
     private int code;
     private String message;

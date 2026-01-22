@@ -1,16 +1,19 @@
 package com.lamdayne.ecommercelaptop.exception;
 
 import com.lamdayne.ecommercelaptop.dto.response.ApiResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ApiResponse<?>> handleException(Exception e) {
+        log.error(e.getMessage());
         return ResponseEntity.badRequest().body(
                 ApiResponse.builder()
                         .code(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode())
