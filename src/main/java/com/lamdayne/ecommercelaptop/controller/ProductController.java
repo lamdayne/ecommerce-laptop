@@ -71,4 +71,18 @@ public class ProductController {
                 .data(productService.getAllProductsByCategoryId(categoryId))
                 .build();
     }
+
+    @GetMapping("/search/category/{categoryId}")
+    public ApiResponse<List<ProductResponse>> getProductsByCategoryId(@PathVariable Integer categoryId) {
+        return ApiResponse.<List<ProductResponse>>builder()
+                .data(productService.getAllProductsByCategoryId(categoryId))
+                .build();
+    }
+
+    @GetMapping("/search/brand/{brandId}")
+    public ApiResponse<List<ProductResponse>> getAllProductsByBrandId(@PathVariable Integer brandId) {
+        return ApiResponse.<List<ProductResponse>>builder()
+                .data(productService.getAllProductsByBrandId(brandId))
+                .build();
+    }
 }

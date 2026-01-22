@@ -92,4 +92,9 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductResponse> getAllProductsByCategoryId(Integer categoryId) {
         return productMapper.toProductResponse(productRepository.getAllProductsByCategoryId(categoryId));
     }
+
+    @Override
+    public List<ProductResponse> getAllProductsByBrandId(Integer brandId) {
+        return productMapper.toProductResponse(productRepository.getAllProductsByBrandId(brandId));
+    }
 }

@@ -17,4 +17,5 @@ public interface ProductService {
     List<ProductResponse> getAllProducts();
     ProductResponse uploadImageProduct(String id, MultipartFile file) throws IOException;
     List<ProductResponse> getAllProductsByCategoryId(Integer categoryId);
+    List<ProductResponse> getAllProductsByBrandId(Integer brandId);
 }
