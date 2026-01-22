@@ -1,12 +1,10 @@
 package com.lamdayne.ecommercelaptop.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @Getter
@@ -24,4 +22,7 @@ public class User {
     private String phone;
     private Date dob;
     private Boolean role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Cart> carts;
 }
