@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -26,5 +27,6 @@ public class CreateUserRequest {
     @Size(min = 10, message = "INVALID_PHONE")
     private String phone;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
 }

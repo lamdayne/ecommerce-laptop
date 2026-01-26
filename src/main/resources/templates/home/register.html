@@ -9,59 +9,111 @@
     <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+    <div class="container">
 
-<div class="card card-register">
-    <div class="card-header">
-        <i class="fas fa-user-plus me-2"></i> ĐĂNG KÝ TÀI KHOẢN
+        <a class="navbar-brand fw-bold text-primary" href="/">LAPTOP STORE</a>
+
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <div class="dropdown">
+                <a class="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    Sản Phẩm
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Laptop</a></li>
+                    <li><a class="dropdown-item" href="#">Bàn phím, Chuột</a></li>
+                    <li><a class="dropdown-item" href="#">Ghế công thái học, Bàn nâng hạ</a></li>
+                    <li><a class="dropdown-item" href="#">Thực tế ảo / Game Console</a></li>
+                    <li><a class="dropdown-item" href="#">Arm màn hình, Màn hình</a></li>
+                    <li><a class="dropdown-item" href="#">RAM, Ổ cứng</a></li>
+                    <li><a class="dropdown-item" href="#">Phụ kiện Setup</a></li>
+                    <li><a class="dropdown-item" href="#">Hộc tủ</a></li>
+                    <li><a class="dropdown-item" href="#">Cổng chuyển, Sạc</a></li>
+                    <li><a class="dropdown-item" href="#">Balo</a></li>
+
+                </ul>
+            </div>
+
+            <form class="d-flex flex-grow-1 mx-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Xin chào, Bạn đang tìm gì?"
+                       aria-label="Search"/>
+                <button class="btn btn-outline-success col-3" type="submit"><i class="ri-search-2-line"></i> Search
+                </button>
+            </form>
+        </div>
     </div>
-    <div class="card-body p-4">
+</nav>
 
-        <form th:action="@{/register}" method="post">
-            <div class="mb-3">
-                <label class="form-label text-muted small fw-bold">Họ và tên</label>
-                <div class="input-group">
-                    <span class="input-group-text bg-light"><i class="fas fa-user"></i></span>
-                    <input type="text" name="fullName" class="form-control" placeholder="Ví dụ: Nguyễn Văn A" required>
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <div class="card card-register">
+        <div class="card-header">
+            <i class="fas fa-user-plus me-2"></i> ĐĂNG KÝ TÀI KHOẢN
+        </div>
+        <div class="card-body p-4">
+
+            <form th:action="@{/auth/register}" method="post">
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold">Họ và tên</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="fas fa-user"></i></span>
+                        <input type="text" name="fullName" class="form-control" placeholder="Nhập họ và tên" required>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label text-muted small fw-bold">Địa chỉ Email</label>
-                <div class="input-group">
-                    <span class="input-group-text bg-light"><i class="fas fa-envelope"></i></span>
-                    <input type="email" name="email" class="form-control" placeholder="email@example.com" required>
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold">Số điện thoại</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="fa-solid fa-phone"></i></span>
+                        <input type="text" name="phone" class="form-control" placeholder="Nhập số điện thoại" required>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label text-muted small fw-bold">Mật khẩu</label>
-                <div class="input-group">
-                    <span class="input-group-text bg-light"><i class="fas fa-lock"></i></span>
-                    <input type="password" name="password" class="form-control" placeholder="Tối thiểu 6 ký tự"
-                           required>
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold">Ngày sinh</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="fa-solid fa-calendar"></i></span>
+                        <input type="date" name="dob" class="form-control" required>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mb-4">
-                <label class="form-label text-muted small fw-bold">Xác nhận mật khẩu</label>
-                <div class="input-group">
-                    <span class="input-group-text bg-light"><i class="fas fa-check-circle"></i></span>
-                    <input type="password" name="confirmPassword" class="form-control" placeholder="Nhập lại mật khẩu"
-                           required>
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold">Địa chỉ Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="fas fa-envelope"></i></span>
+                        <input type="email" name="email" class="form-control" placeholder="Nhập email" required>
+                    </div>
                 </div>
-            </div>
 
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-register">Đăng Ký Ngay</button>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold">Mật khẩu</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="fas fa-lock"></i></span>
+                        <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu"
+                               required>
+                    </div>
+                </div>
 
-            <div class="text-center mt-3">
-                <small>Đã có tài khoản? <a th:href="@{/login}" class="text-primary text-decoration-none fw-bold">Đăng
-                    nhập</a></small>
-            </div>
-        </form>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-register">Đăng Ký Ngay</button>
+                </div>
+
+                <div class="text-center mt-3">
+                    <small>Đã có tài khoản? <a th:href="@{/auth/login}"
+                                               class="text-primary text-decoration-none fw-bold">Đăng
+                        nhập</a></small>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
 
 </body>
 </html>
