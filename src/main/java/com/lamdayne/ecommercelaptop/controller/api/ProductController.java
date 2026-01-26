@@ -85,4 +85,11 @@ public class ProductController {
                 .data(productService.getAllProductsByBrandId(brandId))
                 .build();
     }
+
+    @GetMapping("/search/price")
+    public ApiResponse<List<ProductResponse>> getAllProductsByPrice(@RequestParam("minPrice") Double minPrice, @RequestParam("maxPrice") Double maxPrice) {
+        return ApiResponse.<List<ProductResponse>>builder()
+                .data(productService.getAllProductsByPrice(minPrice, maxPrice))
+                .build();
+    }
 }
