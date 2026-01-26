@@ -1,6 +1,5 @@
-package com.lamdayne.ecommercelaptop.controller;
+package com.lamdayne.ecommercelaptop.controller.api;
 
-import com.cloudinary.Api;
 import com.lamdayne.ecommercelaptop.dto.request.BrandRequest;
 import com.lamdayne.ecommercelaptop.dto.response.ApiResponse;
 import com.lamdayne.ecommercelaptop.dto.response.BrandResponse;
