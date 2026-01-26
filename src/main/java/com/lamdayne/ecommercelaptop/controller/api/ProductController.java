@@ -1,12 +1,10 @@
-package com.lamdayne.ecommercelaptop.controller;
+package com.lamdayne.ecommercelaptop.controller.api;
 
 import com.lamdayne.ecommercelaptop.dto.request.CreateProductRequest;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateProductRequest;
 import com.lamdayne.ecommercelaptop.dto.response.ApiResponse;
 import com.lamdayne.ecommercelaptop.dto.response.ProductResponse;
-import com.lamdayne.ecommercelaptop.entity.Product;
 import com.lamdayne.ecommercelaptop.service.ProductService;
-import com.lamdayne.ecommercelaptop.service.UploadImageFileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -83,6 +81,13 @@ public class ProductController {
     public ApiResponse<List<ProductResponse>> getAllProductsByBrandId(@PathVariable Integer brandId) {
         return ApiResponse.<List<ProductResponse>>builder()
                 .data(productService.getAllProductsByBrandId(brandId))
+                .build();
+    }
+
+    @GetMapping("/search/price")
+    public ApiResponse<List<ProductResponse>> getAllProductsByPrice(@RequestParam("minPrice") Double minPrice, @RequestParam("maxPrice") Double maxPrice) {
+        return ApiResponse.<List<ProductResponse>>builder()
+                .data(productService.getAllProductsByPrice(minPrice, maxPrice))
                 .build();
     }
 }

@@ -97,4 +97,9 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductResponse> getAllProductsByBrandId(Integer brandId) {
         return productMapper.toProductResponse(productRepository.getAllProductsByBrandId(brandId));
     }
+
+    @Override
+    public List<ProductResponse> getAllProductsByPrice(Double minPrice, Double maxPrice) {
+        return productMapper.toProductResponse(productRepository.getAllProductsByPrice(minPrice, maxPrice));
+    }
 }

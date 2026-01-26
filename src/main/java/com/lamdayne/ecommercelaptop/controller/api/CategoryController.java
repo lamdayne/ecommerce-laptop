@@ -1,4 +1,4 @@
-package com.lamdayne.ecommercelaptop.controller;
+package com.lamdayne.ecommercelaptop.controller.api;
 
 import com.lamdayne.ecommercelaptop.dto.request.CategoryRequest;
 import com.lamdayne.ecommercelaptop.dto.response.ApiResponse;
