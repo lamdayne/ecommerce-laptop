@@ -48,8 +48,8 @@
                 </ul>
             </div>
 
-            <form class="d-flex flex-grow-1 mx-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Xin chào, Bạn đang tìm gì?" aria-label="Search"/>
+            <form th:action="@{/searchproducts}" method="get" class="d-flex flex-grow-1 mx-3" role="search" >
+                <input class="form-control me-2" type="search" placeholder="Xin chào, Bạn đang tìm gì?" aria-label="Search" name="keyword" th:value="${keyword}"/>
                 <button class="btn btn-outline-success col-3" type="submit"><i class="ri-search-2-line"></i> Search</button>
             </form>
 
