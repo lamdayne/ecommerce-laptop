@@ -102,4 +102,9 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductResponse> getAllProductsByPrice(Double minPrice, Double maxPrice) {
         return productMapper.toProductResponse(productRepository.getAllProductsByPrice(minPrice, maxPrice));
     }
+
+    @Override
+    public List<ProductResponse> search(String keyword, Integer brandId, Integer categoryId) {
+        return productMapper.toProductResponse(productRepository.search(keyword == null|| keyword.isBlank() ? "null" : keyword, brandId, categoryId));
+    }
 }
