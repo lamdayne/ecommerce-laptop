@@ -7,6 +7,7 @@ import com.lamdayne.ecommercelaptop.entity.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -19,4 +20,7 @@ public interface ProductMapper {
     ProductResponse toProductResponse(Product product);
     void updateProduct(@MappingTarget Product product, UpdateProductRequest request);
     List<ProductResponse> toProductResponse(List<Product> products);
+    default Page<ProductResponse> toProductResponse(Page<Product> page) {
+        return page.map(this::toProductResponse);
+    }
 }

@@ -4,6 +4,7 @@ import com.lamdayne.ecommercelaptop.dto.request.CreateProductRequest;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateProductRequest;
 import com.lamdayne.ecommercelaptop.dto.response.CategoryResponse;
 import com.lamdayne.ecommercelaptop.dto.response.ProductResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,5 +21,6 @@ public interface ProductService {
     List<ProductResponse> getAllProductsByBrandId(Integer brandId);
     List<ProductResponse> getAllProductsByPrice(Double minPrice, Double maxPrice);
     List<ProductResponse> search(String keyword,Integer brandId,Integer categoryId);
-
+    Page<ProductResponse> getProducts(int page, int size);
+    Page<ProductResponse> getProductsByCategory(Integer categoryId, int page, int size);
 }

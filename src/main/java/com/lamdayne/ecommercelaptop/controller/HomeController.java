@@ -6,6 +6,7 @@ import com.lamdayne.ecommercelaptop.service.BrandService;
 import com.lamdayne.ecommercelaptop.service.CategoryService;
 import com.lamdayne.ecommercelaptop.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,21 +22,25 @@ private final CategoryService categoryService;
     private final BrandService brandService;
 
     @GetMapping("/")
-    public String home(
+    public String home( @RequestParam(defaultValue = "0") int page,
         @RequestParam(value = "category", required = false) Integer categoryId,
         Model model) {
+        int size = 8;
+        Page<ProductResponse> productPage;
 
-            List<ProductResponse> products;
+        if (categoryId == null) {
+            productPage = productService.getProducts(page, size);
+        } else {
+            productPage = productService.getProductsByCategory(categoryId, page, size);
+        }
 
-            if (categoryId == null) {
-                products = productService.getAllProducts();
-            } else {
-                products = productService.getAllProductsByCategoryId(categoryId);
-            }
+        model.addAttribute("products", productPage.getContent());
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("activeCategory", categoryId);
 
-        model.addAttribute("products", products) ;
-        model.addAttribute("categories",categoryService.getAllCategories());
-            model.addAttribute("activeCategory", categoryId);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("category", categoryId);
 
         return "home/page";
     }

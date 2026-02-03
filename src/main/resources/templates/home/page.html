@@ -178,19 +178,59 @@
             <a class="card h-100 nav-link shadow-sm" th:href="@{/detail/{productId}(productId=${product.id})}">
                 <img th:src="${product.thumbnail}" class="card-img-top p-2" alt="Product Image" style="object-fit: contain; height: 200px;">
                 <div class="card-body d-flex flex-column">
-                    <p class="card-title fs-6 fw-bold text-dark" th:text="${product.name}"></p>
+                    <p class="card-title fs-6 fw-bold text-dark"
+                       th:text="${product.name}"></p>
 
-                    <div class="mt-auto"> <h6 class="card-subtitle mb-2 fw-medium text-danger">
-                        <th:block th:text="${#numbers.formatDecimal(product.salePrice, 0, 'POINT', 0, 'COMMA')} + ' đ'"></th:block>
-                    </h6>
-                        <del class="text-muted small" th:text="${#numbers.formatDecimal(product.basePrice, 0, 'POINT', 0, 'COMMA')} + ' đ'"></del>
-                        <p class="card-text small text-secondary mt-2" th:text="${product.description}"></p>
+                    <!-- Mô tả nằm trên -->
+                    <p class="card-text small text-secondary mt-2"
+                       th:text="${product.description}"></p>
+
+                    <!-- Giá luôn ở đáy -->
+                    <div class="mt-auto">
+                        <h6 class="fw-medium text-danger mb-1">
+                            <th:block th:text="${#numbers.formatDecimal(product.salePrice, 0, 'POINT', 0, 'COMMA')} + ' đ'"/>
+                        </h6>
+
+                        <del class="text-muted small">
+                            <th:block th:text="${#numbers.formatDecimal(product.basePrice, 0, 'POINT', 0, 'COMMA')} + ' đ'"/>
+                        </del>
                     </div>
                 </div>
+
             </a>
         </div>
     </div>
 </div>
+<nav class="mt-4" th:if="${totalPages > 1}">
+    <ul class="pagination justify-content-center">
+
+        <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{/(page=${currentPage-1}, category=${category})}">
+                &laquo;
+            </a>
+        </li>
+
+        <li class="page-item"
+            th:each="i : ${#numbers.sequence(0, totalPages-1)}"
+            th:classappend="${i == currentPage} ? 'active'">
+            <a class="page-link"
+               th:href="@{/(page=${i}, category=${category})}"
+               th:text="${i+1}">
+            </a>
+        </li>
+
+        <li class="page-item"
+            th:classappend="${currentPage == totalPages-1} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{/(page=${currentPage+1}, category=${category})}">
+                &raquo;
+            </a>
+        </li>
+
+    </ul>
+</nav>
+
 
 
 <div th:replace="~{home/footer :: footer}"></div>
