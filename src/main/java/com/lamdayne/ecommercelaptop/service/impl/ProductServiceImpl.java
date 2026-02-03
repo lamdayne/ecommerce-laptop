@@ -15,6 +15,9 @@ import com.lamdayne.ecommercelaptop.repository.ProductRepository;
 import com.lamdayne.ecommercelaptop.service.ProductService;
 import com.lamdayne.ecommercelaptop.service.UploadImageFileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -107,4 +110,19 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductResponse> search(String keyword, Integer brandId, Integer categoryId) {
         return productMapper.toProductResponse(productRepository.search(keyword == null|| keyword.isBlank() ? "null" : keyword, brandId, categoryId));
     }
+
+    @Override
+    public Page<ProductResponse> getProducts(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return productMapper.toProductResponse(productRepository.findAll(pageable));
+
+    }
+
+    @Override
+    public Page<ProductResponse> getProductsByCategory(Integer categoryId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return productMapper.toProductResponse(productRepository.findByCategoryId(categoryId,pageable));
+
+    }
+
 }
