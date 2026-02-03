@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
             crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="container">
@@ -19,7 +20,7 @@
             <a class="nav-link active" href="/admin/product">Product</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/admin/list-product">List Product</a>
+            <a class="nav-link" href="/admin/product/list">List Product</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Category</a>
@@ -95,5 +96,12 @@
         </form>
     </div>
 </div>
+<script th:if="${message}">
+    Swal.fire({
+        title: "Created success",
+        text: "[[${message}]]",
+        icon: "success"
+    });
+</script>
 </body>
 </html>

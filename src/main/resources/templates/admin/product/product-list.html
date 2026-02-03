@@ -20,7 +20,7 @@
             <a class="nav-link" href="/admin/product">Product</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="/admin/list-product">List Product</a>
+            <a class="nav-link active" href="/admin/product/list">List Product</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Category</a>
@@ -35,8 +35,8 @@
             <a class="nav-link" href="#">Order</a>
         </li>
     </ul>
-    <div class="row">
-        <table class="table table-bordered">
+    <div class="row mt-3">
+        <table class="table table-bordered table-hover">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -44,11 +44,12 @@
                 <th scope="col">Name</th>
                 <th scope="col">Base Price</th>
                 <th scope="col">Sale Price</th>
+                <th scope="col">Stock</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="product, status : ${products}">
+            <th:block th:each="product, status : ${page.content}">
                 <tr>
                     <th scope="row" th:text="${status.count}"></th>
                     <td>
@@ -57,6 +58,7 @@
                     <td class="fw-medium" th:text="${product.name}"></td>
                     <td th:text="${#numbers.formatDecimal(product.basePrice, 0, 'POINT', 0, 'COMMA')} + ' đ'"></td>
                     <td th:text="${#numbers.formatDecimal(product.salePrice, 0, 'POINT', 0, 'COMMA')} + ' đ'"></td>
+                    <td th:text="${product.stock}"></td>
                     <td>
                         <a th:href="@{|/admin/product/${product.id}|}" class="btn btn-warning">Edit</a>
                         <button th:data-id="${product.id}" class="btn btn-danger btn-delete">Delete</button>
@@ -65,6 +67,29 @@
             </th:block>
             </tbody>
         </table>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link"
+                       th:classappend="${page.isFirst() ? 'disabled' : ''}"
+                       th:href="@{|/admin/product/list?page=${page.number}|}"
+                    >Previous</a>
+                </li>
+                <li class="page-item"
+                    th:each="i : ${#numbers.sequence(1, page.getTotalPages())}"
+                    th:classappend="${i == page.number + 1 ? 'active' : ''}"
+                >
+                    <a class="page-link" th:href="@{|/admin/product/list?page=${i}|}" th:text="${i}"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{|/admin/product/list?page=${page.number + 2}|}"
+                       th:classappend="${page.isLast() ? 'disabled' : ''}"
+                    >Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
 
@@ -90,7 +115,7 @@
                                 text: result.message,
                                 icon: "success"
                             });
-                            window.location.href = "/admin/list-product";
+                            window.location.href = "/admin/product/list";
                         })
                 }
             });

@@ -19,7 +19,7 @@
             <a class="nav-link active" href="/admin/product">Product</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/admin/list-product">List Product</a>
+            <a class="nav-link" href="/admin/product/list">List Product</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Category</a>
@@ -61,11 +61,11 @@
             <div class="col-2 mb-3">
                 <label class="form-label fs-5 fw-medium">Status In stock</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status" id="radioDefault1" th:checked="${product.status == 1}">
+                    <input class="form-check-input" type="radio" name="status" id="radioDefault1" value="1" th:checked="${product.status == 1}">
                     <label class="form-check-label" for="radioDefault1">Yes</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status" id="radioDefault2" th:checked="${product.status == 0}">
+                    <input class="form-check-input" type="radio" name="status" id="radioDefault2" value="0" th:checked="${product.status == 0}">
                     <label class="form-check-label" for="radioDefault2">No</label>
                 </div>
             </div>
