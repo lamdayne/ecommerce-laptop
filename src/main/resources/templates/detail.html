@@ -13,52 +13,7 @@
     />
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-white shadow-sm">
-    <div class="container">
-
-        <a class="navbar-brand fw-bold text-primary" href="/">LAPTOP STORE</a>
-
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="menu">
-
-            <div class="dropdown">
-                <a class="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Sản Phẩm
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Laptop</a></li>
-                    <li><a class="dropdown-item" href="#">Bàn phím, Chuột</a></li>
-                    <li><a class="dropdown-item" href="#">Ghế công thái học, Bàn nâng hạ</a></li>
-                    <li><a class="dropdown-item" href="#">Thực tế ảo / Game Console</a></li>
-                    <li><a class="dropdown-item" href="#">Arm màn hình, Màn hình</a></li>
-                    <li><a class="dropdown-item" href="#">RAM, Ổ cứng</a></li>
-                    <li><a class="dropdown-item" href="#">Phụ kiện Setup</a></li>
-                    <li><a class="dropdown-item" href="#">Hộc tủ</a></li>
-                    <li><a class="dropdown-item" href="#">Cổng chuyển, Sạc</a></li>
-                    <li><a class="dropdown-item" href="#">Balo</a></li>
-
-                </ul>
-            </div>
-
-            <form class="d-flex flex-grow-1 mx-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Xin chào, Bạn đang tìm gì?" aria-label="Search"/>
-                <button class="btn btn-outline-success col-3" type="submit"><i class="ri-search-2-line"></i> Search</button>
-            </form>
-
-            <div class="ms-auto d-flex align-items-center">
-                <a th:href="@{/login}" class="btn btn-outline-dark me-2"><i class="ri-account-circle-line"></i>  Đăng nhập</a>
-
-                <a class="btn btn-success rounded-pill">
-                    <i class="ri-shopping-cart-line"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</nav>
+<div th:replace="~{navbar}"></div>
 <div class="container mt-5">
 <!--    <div class="breadcrumb">-->
 <!--        <span>Trang chủ</span> / <span>Laptop</span> / <span>Lenovo</span>-->
