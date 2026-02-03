@@ -19,4 +19,6 @@ public interface ProductService {
     List<ProductResponse> getAllProductsByCategoryId(Integer categoryId);
     List<ProductResponse> getAllProductsByBrandId(Integer brandId);
     List<ProductResponse> getAllProductsByPrice(Double minPrice, Double maxPrice);
+    List<ProductResponse> search(String keyword,Integer brandId,Integer categoryId);
+
 }
