@@ -57,4 +57,11 @@ public class AuthController {
         userService.createUser(userInfo);
         return "redirect:/auth/login";
     }
+
+    @GetMapping("/my-info")
+    public String myInfo(Model model){
+        model.addAttribute("user", session.get(SessionConstant.SESSION_USER));
+        return "/home/my-info";
+    }
+
 }

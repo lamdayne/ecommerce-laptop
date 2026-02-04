@@ -40,7 +40,7 @@
                     Đăng nhập
                 </a>
                 <div th:if="${session.user != null}">
-                    <a href="/myInfo" class="btn btn-success rounded-pill">
+                    <a href="/auth/my-info" class="btn btn-success rounded-pill">
                         <i class="ri-account-circle-line"></i>
                         <span th:text="${session.user.fullName}"></span>
                     </a>
