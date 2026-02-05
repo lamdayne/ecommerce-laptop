@@ -31,14 +31,50 @@
             <td>
                 <a th:href="@{/admin/brand/edit/{id}(id=${b.id})}"
                    class="btn btn-sm btn-warning">Sửa</a>
-                <a th:href="@{/admin/brand/delete/{id}(id=${b.id})}"
-                   class="btn btn-sm btn-danger"
-                   onclick="return confirm('Xóa brand này?')">Xóa</a>
+
+                <!-- ❌ bỏ confirm mặc định -->
+                <button type="button"
+                        class="btn btn-sm btn-danger"
+                        th:onclick="'deleteBrand(' + ${b.id} + ')'">
+                    Xóa
+                </button>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:if="${param.success}">
+    Swal.fire({
+        icon: 'success',
+        title: 'Thành công',
+        text: '[[${success}]]',
+        timer: 2000,
+        showConfirmButton: false
+    }).then(() => {
+        const url = new URL(window.location);
+        url.searchParams.delete('success');
+        window.history.replaceState({}, document.title, url);
+    });
+</script>
+
+<script>
+    function deleteBrand(id) {
+        Swal.fire({
+            title: 'Xác nhận xóa?',
+            text: 'Brand sẽ bị xóa vĩnh viễn!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `/admin/brand/delete/${id}`;
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

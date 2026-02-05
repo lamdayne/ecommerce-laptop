@@ -49,7 +49,7 @@ public class BrandControllerAdmin {
         }
 
         ra.addFlashAttribute("success", "Thêm brand thành công");
-        return "redirect:/admin/brand/list";
+        return "redirect:/admin/brand?success=true";
     }
 
     // UPDATE FORM
@@ -73,7 +73,7 @@ public class BrandControllerAdmin {
         }
 
         ra.addFlashAttribute("success", "Cập nhật brand thành công");
-        return "redirect:/admin/brand/list";
+        return "redirect:/admin/brand?success=true";
     }
 
     // DELETE
@@ -81,6 +81,6 @@ public class BrandControllerAdmin {
     public String delete(@PathVariable int id, RedirectAttributes ra) {
         brandService.deleteBrand(id);
         ra.addFlashAttribute("success", "Xóa brand thành công");
-        return "redirect:/admin/brand/list";
+        return "redirect:/admin/brand?success=true";
     }
 }
