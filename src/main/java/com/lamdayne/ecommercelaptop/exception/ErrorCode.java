@@ -32,6 +32,9 @@ public enum ErrorCode {
     CART_USER_ID_BLANK(1025, "User ID cannot be blank"),
     CART_PRODUCT_ID_BLANK(1026, "Product ID cannot be blank"),
     PRODUCT_QUANTITY_NULL(1027, "Product quantity cannot null"),
+    OLD_PASSWORD_INVALID(400, "The old password is incorrect."),
+    PASSWORD_CONFIRM_NOT_MATCH(400, "The verification password does not match.");
+
     ;
     private int code;
     private String message;
