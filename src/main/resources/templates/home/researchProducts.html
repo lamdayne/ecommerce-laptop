@@ -17,13 +17,66 @@
    class="text-center text-muted p-3">
     Không tìm thấy sản phẩm phù hợp
 </p>
+
+
 <div class="container">
     <h4 class="mb-4 fw-semibold p-3">
         Kết quả tìm kiếm cho:
         <span class="text-danger" th:text="${keyword}"></span>
     </h4>
+
     <div class="row">
-        <div class="col-6 col-md-4 col-lg-3" th:each="product : ${products}">
+
+        <div class="col-md-3 mb-4">
+            <form th:action="@{/searchproducts}" method="get" class="card p-3 shadow-sm">
+                <input type="hidden" name="keyword" th:value="${keyword}"/>
+
+                <h6 class="fw-semibold mb-3">Lọc theo giá</h6>
+
+                <div class="mb-2">
+                    <label class="form-label">Giá từ</label>
+                    <input type="number" class="form-control"
+                           id="minPrice"
+                           name="minPrice"
+                           min="0"
+                           placeholder="₫ Từ"
+                           th:value="${minPrice}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Giá đến</label>
+                    <input type="number" class="form-control"
+                           id="maxPrice"
+                           name="maxPrice"
+                           min="0"
+                           placeholder="₫ Đến"
+                           th:value="${maxPrice}">
+                </div>
+
+                <h6 class="fw-semibold mb-2">Thương hiệu</h6>
+
+                <div class="form-check mb-1" th:each="brand : ${brands}">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="brandId"
+                           th:id="'brand-' + ${brand.id}"
+                           th:value="${brand.id}"
+                           th:checked="${brandId == brand.id}">
+                    <label class="form-check-label"
+                           th:for="'brand-' + ${brand.id}"
+                           th:text="${brand.name}">
+                    </label>
+                </div>
+
+                <button class="btn btn-danger w-100">
+                    Áp dụng
+                </button>
+            </form>
+        </div>
+
+        <div class="col-lg-9 col-md-8">
+        <div class="row">
+        <div class="col-6 col-md-4 col-lg-3 p-1" th:each="product : ${products}">
             <a class="card h-100 nav-link shadow-sm" th:href="@{/detail/{productId}(productId=${product.id})}">
                 <img th:src="${product.thumbnail}" class="card-img-top p-2" alt="Product Image"
                      style="object-fit: contain; height: 200px;">
@@ -55,8 +108,35 @@
             </a>
         </div>
     </div>
+    </div>
+    </div>
+
 </div>
 
 <div th:replace="~{home/footer :: footer}"></div>
+
+<script>
+    const minInput = document.getElementById('minPrice');
+    const maxInput = document.getElementById('maxPrice');
+
+    function validatePrice() {
+        const min = Number(minInput.value);
+        const max = Number(maxInput.value);
+
+        // Chặn số âm
+        if (min < 0) minInput.value = 0;
+        if (max < 0) maxInput.value = 0;
+
+        // Chặn max < min
+        if (maxInput.value && minInput.value && max < min) {
+            maxInput.setCustomValidity("Giá đến phải lớn hơn hoặc bằng giá từ");
+        } else {
+            maxInput.setCustomValidity("");
+        }
+    }
+
+    minInput.addEventListener('input', validatePrice);
+    maxInput.addEventListener('input', validatePrice);
+</script>
 </body>
 </html>
