@@ -39,11 +39,21 @@
                     <i class="ri-account-circle-line"></i>
                     Đăng nhập
                 </a>
-                <div th:if="${session.user != null}">
-                    <a href="/auth/my-info" class="btn btn-success rounded-pill">
-                        <i class="ri-account-circle-line"></i>
-                        <span th:text="${session.user.fullName}"></span>
-                    </a>
+                <div th:if="${session.user != null}" class="d-flex align-items-center">
+<!--                    <a href="/auth/my-info" class="btn btn-success rounded-pill">-->
+<!--                        <i class="ri-account-circle-line"></i>-->
+<!--                        <span th:text="${session.user.fullName}"></span>-->
+<!--                    </a>-->
+
+                    <div class="dropdown me-3">
+                        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span th:text="${session.user.fullName}"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/auth/my-info">Account</a></li>
+                            <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+                        </ul>
+                    </div>
 
                     <a class="btn btn-success rounded-pill">
                         <i class="ri-shopping-cart-line"></i>
