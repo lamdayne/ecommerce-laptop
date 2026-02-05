@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Brand List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h3>Danh sách Brand</h3>
+
+    <a th:href="@{/admin/brand/create}" class="btn btn-success mb-3">+ Thêm Brand</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Ảnh</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="b : ${brands}">
+            <td th:text="${b.id}"></td>
+            <td th:text="${b.name}"></td>
+            <td>
+                <img th:src="${b.imageUrl}" width="80">
+            </td>
+            <td>
+                <a th:href="@{/admin/brand/edit/{id}(id=${b.id})}"
+                   class="btn btn-sm btn-warning">Sửa</a>
+                <a th:href="@{/admin/brand/delete/{id}(id=${b.id})}"
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Xóa brand này?')">Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
