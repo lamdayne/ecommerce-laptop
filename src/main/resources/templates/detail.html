@@ -51,17 +51,18 @@
                     </div>
                 </div>
 
-                <div class="action-buttons">
-                    <button type="button" class="btn-buy-now">
+                <form class="action-buttons" method="post">
+                    <input name="productId" th:value="${productId}" hidden>
+                    <button type="submit" formaction="/checkout" class="btn-buy-now">
                         <strong>MUA NGAY</strong>
                         <span>(Giao hàng tận nơi hoặc lấy tại cửa hàng)</span>
                     </button>
 
-                    <button type="button" class="btn-add-cart">
+                    <button type="submit" class="btn-add-cart" formaction="/add-to-cart">
                         <i class="fas fa-cart-plus"></i>
                         <span>Thêm vào giỏ</span>
                     </button>
-                </div>
+                </form>
 
 <!--                <div class="installment-section">-->
 <!--                    <button type="button" class="btn-installment">-->

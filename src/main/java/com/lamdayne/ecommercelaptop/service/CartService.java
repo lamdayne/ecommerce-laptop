@@ -13,4 +13,5 @@ public interface CartService {
     CartResponse getCartById(String cartId);
     List<CartResponse> getAllCarts();
     List<CartResponse> getAllCartsByUserId(String userId);
+    CartResponse addToCart(String productId);
 }

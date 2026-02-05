@@ -4,155 +4,202 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>ecommerce pay</title>
-    <link rel="stylesheet" th:href="@{/css/checkout.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/checkout.css}">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet"/>
 </head>
 <body>
-
+<div th:replace="~{navbar}"></div>
 <div class="container">
-    <div class="header">Thanh toán</div>
-
-    <div class="section" style="cursor:pointer;" onclick="openModal()">
-        <div style="display:flex; align-items:center; justify-content:space-between;">
-            <div>
-                <div style="font-weight:600; color:#ee4d2d;">Thành phố Hồ Chí Minh</div>
-                <div style="font-size:14px; color:#555; margin-top:4px;">
-                    Vui lòng cung cấp thông tin nhận hàng
-                </div>
+    <form class="row mt-3" action="/pay" method="post">
+        <h3 class="text-center mb-3">Thanh toán đơn hàng</h3>
+        <div class="col-8">
+            <div class="mb-3 col-6">
+                <label for="exampleFormControlInput1" class="form-label">Email nhận thông tin đặt hàng</label>
+                <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
             </div>
-            <div style="font-size:20px;">›</div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Địa chỉ</label>
+                <textarea name="address" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <input name="productId" th:value="${product.id}" hidden>
+            <input name="totalPrice" th:value="${product.salePrice}" hidden>
         </div>
-    </div>
+        <div class="col-4">
+            <ul class="list-group mb-3 shadow-sm">
+                <li class="list-group-item d-flex justify-content-between lh-sm p-3">
+                    <div class="d-flex align-items-center">
+                        <img th:src="${product.thumbnail}" alt="Product" class="rounded me-3 border" style="width: 60px; height: 60px; object-fit: cover;">
+                        <div>
+                            <h6 class="my-0" th:text="${product.name}"></h6>
+                            <small class="text-muted"></small>
+                            <div class="small text-muted">Số lượng: 1</div>
+                        </div>
+                    </div>
+                    <span class="text-muted" th:text="${#numbers.formatInteger(product.salePrice, 3, 'POINT') + 'đ'}"></span>
+                </li>
 
-    <!-- Sản phẩm -->
-    <div class="section">
-        <div style="display:flex; gap:12px;">
-            <img src="" alt="Laptop" width="80" style="border-radius:4px;">
-            <div style="flex:1;">
-                <div style="font-weight:500; line-height:1.4;">
-                    Laptop HP 15 fc0085AU - A6VV8PA (R5 7430U, 16GB, 512GB, Full HD, Win11)
-                </div>
-                <div style="color:#ee4d2d; font-weight:600; margin:8px 0;">
-                    14.590.000đ
-                </div>
-                <div style="font-size:13px; color:#888; text-decoration:line-through;">
-                    16.090.000đ
-                </div>
-                <div style="margin-top:8px; font-size:14px;">
-                    Màu Vàng – <span style="color:#ee4d2d;">Chọn 1 trong 2 khuyến mãi</span>
-                </div>
-            </div>
+                <li class="list-group-item d-flex justify-content-between p-3">
+                    <strong>Tổng cộng (VNĐ)</strong>
+                    <strong class="text-primary fs-5" th:text="${#numbers.formatInteger(product.salePrice, 3, 'POINT') + 'đ'}"></strong>
+                </li>
+            </ul>
         </div>
-    </div>
-
-
-    <!-- Tổng tiền -->
-    <div class="total-bar">
-        <span>Tổng tiền</span>
-        <span class="price">14.590.000đ</span>
-    </div>
-    <div style="padding:0 16px 16px; font-size:14px; color:#555;">
-        Điểm tích lũy Quà Tặng VIP: <strong>29.191.180 điểm</strong>
-    </div>
-
-    <!-- Phương thức thanh toán -->
-    <div class="section payment-method">
-        <div class="section-title">Hình thức thanh toán</div>
-
-        <label class="payment-item">
-            <input type="radio" name="payment" checked>
-            <div>
-                <span class="highlight">Qua ví MWG PayLater Đăng ký ngay</span><br>
-                <span style="font-size:13px;">(Hạn mức đến 40 triệu, lãi 0% đến 45 ngày)</span>
-            </div>
-        </label>
-
-        <label class="payment-item">
-            <input type="radio" name="payment">
-            <div>Chuyển khoản ngân hàng</div>
-        </label>
-
-        <label class="payment-item">
-            <input type="radio" name="payment">
-            <div>Thanh toán tiền mặt khi nhận hàng</div>
-        </label>
-
-        <label style="display:flex; align-items:center; font-size:14px; margin-top:12px;">
-            <input type="checkbox" checked style="margin-right:10px;">
-            Tôi đồng ý với Chính sách xử lý dữ liệu cá nhân của Thế Giới Di Động
-        </label>
-    </div>
-
-    <button class="btn-order">Đặt hàng</button>
-
+        <button type="submit" class="btn btn-success rounded-pill">Thanh toán</button>
+    </form>
 </div>
 
-<!-- Modal Thông tin giao hàng -->
-<div id="deliveryModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span>Thông tin giao hàng</span>
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-        </div>
-        <div class="modal-body">
 
-            <div class="section-title">Thông tin người đặt</div>
-            <div class="gender-group">
-                <label><input type="radio" name="gender" checked> Anh</label>
-                <label><input type="radio" name="gender"> Chị</label>
-            </div>
 
-            <div class="input-group">
-                <label>Họ và Tên</label>
-                <input type="text" placeholder="Họ và Tên">
-            </div>
 
-            <div class="input-group">
-                <label>Số điện thoại</label>
-                <input type="tel" placeholder="Số điện thoại">
-            </div>
 
-            <div style="color:#007aff; margin:12px 0; cursor:pointer;">
-                Hoặc Đăng nhập để lấy nhanh thông tin giao hàng
-            </div>
+<!--<div class="container">-->
+<!--    <div class="header">Thanh toán</div>-->
 
-            <div class="section-title">Chọn hình thức giao hàng</div>
-            <div class="delivery-type">
-                <div class="delivery-btn active">Giao tận nơi</div>
-                <div class="delivery-btn">Nhận tại siêu thị</div>
-            </div>
+<!--    <div class="section" style="cursor:pointer;" onclick="openModal()">-->
+<!--        <div style="display:flex; align-items:center; justify-content:space-between;">-->
+<!--            <div>-->
+<!--                <div style="font-weight:600; color:#ee4d2d;">Thành phố Hồ Chí Minh</div>-->
+<!--                <div style="font-size:14px; color:#555; margin-top:4px;">-->
+<!--                    Vui lòng cung cấp thông tin nhận hàng-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div style="font-size:20px;">›</div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-            <div style="font-weight:500; margin:16px 0 8px;">
-                Địa chỉ đang chọn: Thành Phố Hồ Chí Minh
-            </div>
-            <div style="color:#007aff; cursor:pointer; padding:10px 0;">
-                + Chỉnh sửa thông tin địa chỉ giao hàng
-            </div>
+<!--    &lt;!&ndash; Sản phẩm &ndash;&gt;-->
+<!--    <div class="section">-->
+<!--        <div style="display:flex; gap:12px;">-->
+<!--            <img src="" alt="Laptop" width="80" style="border-radius:4px;">-->
+<!--            <div style="flex:1;">-->
+<!--                <div style="font-weight:500; line-height:1.4;">-->
+<!--                    Laptop HP 15 fc0085AU - A6VV8PA (R5 7430U, 16GB, 512GB, Full HD, Win11)-->
+<!--                </div>-->
+<!--                <div style="color:#ee4d2d; font-weight:600; margin:8px 0;">-->
+<!--                    14.590.000đ-->
+<!--                </div>-->
+<!--                <div style="font-size:13px; color:#888; text-decoration:line-through;">-->
+<!--                    16.090.000đ-->
+<!--                </div>-->
+<!--                <div style="margin-top:8px; font-size:14px;">-->
+<!--                    Màu Vàng – <span style="color:#ee4d2d;">Chọn 1 trong 2 khuyến mãi</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-            <label style="display:flex; align-items:center; font-size:14px; margin:16px 0;">
-                <input type="checkbox"> Người khác nhận hàng
-            </label>
 
-            <button class="confirm-btn">Xác Nhận</button>
+<!--    &lt;!&ndash; Tổng tiền &ndash;&gt;-->
+<!--    <div class="total-bar">-->
+<!--        <span>Tổng tiền</span>-->
+<!--        <span class="price">14.590.000đ</span>-->
+<!--    </div>-->
+<!--    <div style="padding:0 16px 16px; font-size:14px; color:#555;">-->
+<!--        Điểm tích lũy Quà Tặng VIP: <strong>29.191.180 điểm</strong>-->
+<!--    </div>-->
 
-        </div>
-    </div>
-</div>
+<!--    &lt;!&ndash; Phương thức thanh toán &ndash;&gt;-->
+<!--    <div class="section payment-method">-->
+<!--        <div class="section-title">Hình thức thanh toán</div>-->
 
-<script>
-    function openModal() {
-        document.getElementById('deliveryModal').style.display = 'flex';
-    }
-    function closeModal() {
-        document.getElementById('deliveryModal').style.display = 'none';
-    }
-    // Đóng modal khi click bên ngoài
-    window.onclick = function(event) {
-        const modal = document.getElementById('deliveryModal');
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    }
-</script>
+<!--        <label class="payment-item">-->
+<!--            <input type="radio" name="payment" checked>-->
+<!--            <div>-->
+<!--                <span class="highlight">Qua ví MWG PayLater Đăng ký ngay</span><br>-->
+<!--                <span style="font-size:13px;">(Hạn mức đến 40 triệu, lãi 0% đến 45 ngày)</span>-->
+<!--            </div>-->
+<!--        </label>-->
+
+<!--        <label class="payment-item">-->
+<!--            <input type="radio" name="payment">-->
+<!--            <div>Chuyển khoản ngân hàng</div>-->
+<!--        </label>-->
+
+<!--        <label class="payment-item">-->
+<!--            <input type="radio" name="payment">-->
+<!--            <div>Thanh toán tiền mặt khi nhận hàng</div>-->
+<!--        </label>-->
+
+<!--        <label style="display:flex; align-items:center; font-size:14px; margin-top:12px;">-->
+<!--            <input type="checkbox" checked style="margin-right:10px;">-->
+<!--            Tôi đồng ý với Chính sách xử lý dữ liệu cá nhân của Thế Giới Di Động-->
+<!--        </label>-->
+<!--    </div>-->
+
+<!--    <button class="btn-order">Đặt hàng</button>-->
+
+<!--</div>-->
+
+<!--&lt;!&ndash; Modal Thông tin giao hàng &ndash;&gt;-->
+<!--<div id="deliveryModal" class="modal">-->
+<!--    <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--            <span>Thông tin giao hàng</span>-->
+<!--            <span class="close-btn" onclick="closeModal()">&times;</span>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+
+<!--            <div class="section-title">Thông tin người đặt</div>-->
+<!--            <div class="gender-group">-->
+<!--                <label><input type="radio" name="gender" checked> Anh</label>-->
+<!--                <label><input type="radio" name="gender"> Chị</label>-->
+<!--            </div>-->
+
+<!--            <div class="input-group">-->
+<!--                <label>Họ và Tên</label>-->
+<!--                <input type="text" placeholder="Họ và Tên">-->
+<!--            </div>-->
+
+<!--            <div class="input-group">-->
+<!--                <label>Số điện thoại</label>-->
+<!--                <input type="tel" placeholder="Số điện thoại">-->
+<!--            </div>-->
+
+<!--            <div style="color:#007aff; margin:12px 0; cursor:pointer;">-->
+<!--                Hoặc Đăng nhập để lấy nhanh thông tin giao hàng-->
+<!--            </div>-->
+
+<!--            <div class="section-title">Chọn hình thức giao hàng</div>-->
+<!--            <div class="delivery-type">-->
+<!--                <div class="delivery-btn active">Giao tận nơi</div>-->
+<!--                <div class="delivery-btn">Nhận tại siêu thị</div>-->
+<!--            </div>-->
+
+<!--            <div style="font-weight:500; margin:16px 0 8px;">-->
+<!--                Địa chỉ đang chọn: Thành Phố Hồ Chí Minh-->
+<!--            </div>-->
+<!--            <div style="color:#007aff; cursor:pointer; padding:10px 0;">-->
+<!--                + Chỉnh sửa thông tin địa chỉ giao hàng-->
+<!--            </div>-->
+
+<!--            <label style="display:flex; align-items:center; font-size:14px; margin:16px 0;">-->
+<!--                <input type="checkbox"> Người khác nhận hàng-->
+<!--            </label>-->
+
+<!--            <button class="confirm-btn">Xác Nhận</button>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    function openModal() {-->
+<!--        document.getElementById('deliveryModal').style.display = 'flex';-->
+<!--    }-->
+<!--    function closeModal() {-->
+<!--        document.getElementById('deliveryModal').style.display = 'none';-->
+<!--    }-->
+<!--    // Đóng modal khi click bên ngoài-->
+<!--    window.onclick = function(event) {-->
+<!--        const modal = document.getElementById('deliveryModal');-->
+<!--        if (event.target === modal) {-->
+<!--            modal.style.display = 'none';-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 
 </body>
 </html>

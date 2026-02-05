@@ -10,31 +10,8 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<div th:replace="~{admin/navbar-admin}"></div>
 <div class="container">
-    <ul class="nav nav-pills nav-justified">
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/admin/index">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="/admin/product">Product</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/admin/product/list">List Product</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Category</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Brand</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">User</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Order</a>
-        </li>
-    </ul>
-
     <div class="row">
         <h1 class="text-center mt-3">Create Product</h1>
         <form th:action="@{|/admin/product/${product.id}|}" method="post" class="row" enctype="multipart/form-data">
