@@ -107,8 +107,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> search(String keyword, Integer brandId, Integer categoryId) {
-        return productMapper.toProductResponse(productRepository.search(keyword == null|| keyword.isBlank() ? "null" : keyword, brandId, categoryId));
+    public List<ProductResponse> search(String keyword, Integer brandId, Integer categoryId, Long minPrice , Long maxPrice) {
+        if (minPrice == null) minPrice = 0L;
+        if (maxPrice == null) maxPrice = Long.MAX_VALUE;
+        return productMapper.toProductResponse(productRepository.search(keyword == null|| keyword.isBlank() ? "null" : keyword, brandId, categoryId, minPrice, maxPrice));
     }
 
     @Override
