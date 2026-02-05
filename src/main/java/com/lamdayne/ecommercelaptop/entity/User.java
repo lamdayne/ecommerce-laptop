@@ -23,7 +23,7 @@ public class User {
     private Date dob;
     private Boolean role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Cart> carts;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
