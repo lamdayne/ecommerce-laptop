@@ -51,14 +51,18 @@ private final CategoryService categoryService;
     public String List(@RequestParam(required = false) String keyword,
                        @RequestParam(required = false) Integer brandId,
                        @RequestParam(required = false) Integer categoryId,
+                       @RequestParam(required = false) Long minPrice,
+                       @RequestParam(required = false) Long maxPrice,
                        Model model
     ) {
-        model.addAttribute("products", productService.search(keyword, brandId, categoryId));
+        model.addAttribute("products", productService.search(keyword, brandId, categoryId, minPrice, maxPrice));
         model.addAttribute("categories",categoryService.getAllCategories());
         model.addAttribute("brands", brandService.getAllBrands());
         model.addAttribute("keyword", keyword);
         model.addAttribute("brandId", brandId);
         model.addAttribute("categoryId", categoryId);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
 
         return "home/researchProducts";
     }

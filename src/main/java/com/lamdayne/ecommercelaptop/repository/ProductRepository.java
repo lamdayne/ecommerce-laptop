@@ -25,11 +25,14 @@ public interface ProductRepository extends JpaRepository<Product, String> {
              OR LOWER(p.description) LIKE LOWER(CONCAT('%', :keyword, '%')))
         AND (:brandId IS NULL OR p.brand.id = :brandId)
         AND (:categoryId IS NULL OR p.category.id = :categoryId)
+        AND (p.salePrice BETWEEN :minPrice AND :maxPrice)
     """)
     List<Product> search(
             @Param("keyword") String keyword,
             @Param("brandId") Integer brandId,
-            @Param("categoryId") Integer categoryId
+            @Param("categoryId") Integer categoryId,
+            @Param("minPrice") Long minPrice,
+            @Param("maxPrice") Long maxPrice
     );
     Page<Product> findAll(Pageable pageable);
 
