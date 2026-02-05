@@ -51,11 +51,12 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/auth/my-info">Account</a></li>
+                            <li th:if="${session.user.getRole}"><a class="dropdown-item" href="/admin/index">Admin Dashboard</a></li>
                             <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
                         </ul>
                     </div>
 
-                    <a class="btn btn-success rounded-pill">
+                    <a href="/cart" class="btn btn-success rounded-pill">
                         <i class="ri-shopping-cart-line"></i>
                     </a>
                 </div>

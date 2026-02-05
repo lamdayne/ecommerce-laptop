@@ -1,5 +1,6 @@
 package com.lamdayne.ecommercelaptop.service.impl;
 
+import com.lamdayne.ecommercelaptop.constant.SessionConstant;
 import com.lamdayne.ecommercelaptop.dto.request.CreateCartRequest;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateCartRequest;
 import com.lamdayne.ecommercelaptop.dto.response.CartResponse;
@@ -13,6 +14,7 @@ import com.lamdayne.ecommercelaptop.repository.CartRepository;
 import com.lamdayne.ecommercelaptop.repository.ProductRepository;
 import com.lamdayne.ecommercelaptop.repository.UserRepository;
 import com.lamdayne.ecommercelaptop.service.CartService;
+import com.lamdayne.ecommercelaptop.util.SessionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ public class CartServiceImpl implements CartService {
     private final CartMapper cartMapper;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final SessionUtil sessionUtil;
 
     @Override
     public CartResponse createCart(CreateCartRequest request) {
@@ -65,5 +68,14 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartResponse> getAllCartsByUserId(String userId) {
         return cartMapper.toCartResponseList(cartRepository.getAllCartsByUserId(userId));
+    }
+
+    @Override
+    public CartResponse addToCart(String productId) {
+        Cart cart = new Cart();
+        cart.setUser((User) sessionUtil.get(SessionConstant.SESSION_USER));
+        cart.setProduct(productRepository.findById(productId).orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND)));
+        cart.setQuantity(1);
+        return cartMapper.toCartResponse(cartRepository.save(cart));
     }
 }
