@@ -2,6 +2,7 @@ package com.lamdayne.ecommercelaptop.service.impl;
 
 import com.lamdayne.ecommercelaptop.constant.Role;
 import com.lamdayne.ecommercelaptop.dto.request.CreateUserRequest;
+import com.lamdayne.ecommercelaptop.dto.request.UpdateUserDTO;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateUserRequest;
 import com.lamdayne.ecommercelaptop.dto.response.UserResponse;
 import com.lamdayne.ecommercelaptop.entity.User;
@@ -68,6 +69,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
+    }
+
+    @Override
+    public UserResponse updateUser(String userId, UpdateUserDTO userDTO) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+
+        user.setFullName(userDTO.getFullName());
+        user.setPhone(userDTO.getPhone());
+        user.setDob(userDTO.getDob());
+        return userMapper.toUserResponse(userRepository.save(user));
     }
 
 }

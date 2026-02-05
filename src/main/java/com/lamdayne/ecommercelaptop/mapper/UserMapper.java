@@ -1,6 +1,7 @@
 package com.lamdayne.ecommercelaptop.mapper;
 
 import com.lamdayne.ecommercelaptop.dto.request.CreateUserRequest;
+import com.lamdayne.ecommercelaptop.dto.request.UpdateUserDTO;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateUserRequest;
 import com.lamdayne.ecommercelaptop.dto.response.UserResponse;
 import com.lamdayne.ecommercelaptop.entity.User;
