@@ -22,7 +22,7 @@ import java.util.List;
 public class AdminUserController {
 
     private final UserService userService;
-    
+
     @GetMapping
     public String redirectToList() {
         return "redirect:/admin/account/list";
