@@ -56,86 +56,13 @@
     <div class="row row-cols-8 row-cols-md-8 row-cols-lg-8 g-4 text-center">
 
         <!-- Item -->
-        <div class="col">
+        <div class="col" th:each="brand : ${brands}" >
             <a href="#" class="category-item text-decoration-none text-dark">
                 <div class="category-box">
-                    <img src="/images/categories/laptop-nhap-khau-khong-nen.jpg" class="img-fluid mb-2" />
+                    <img th:src="${brand.imageUrl}" class="img-fluid mb-2" />
 
                 </div>
-                <p class="fw-semibold small">Laptop nhập khẩu</p>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="#" class="category-item text-decoration-none text-dark">
-                <div class="category-box">
-                    <img src="/images/categories/laptop-chinh-hang-khong-nen.jpg" class="img-fluid mb-2" />
-                </div>
-
-                <p class="fw-semibold small">Laptop chính hãng</p>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="#" class="category-item text-decoration-none text-dark">
-                <div class="category-box">
-                    <img src="/images/categories/man-hinh-di-dong-ao.jpg" class="img-fluid mb-2" />
-                </div>
-
-                <p class="fw-semibold small">Màn hình di động</p>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="#" class="category-item text-decoration-none text-dark">
-                <div class="category-box">
-                    <img src="/images/categories/danh-muc-icon-may-choi-game-game-console-thinkpro.vn.jpg" class="img-fluid mb-2" />
-                </div>
-
-                <p class="fw-semibold small ">
-                    Máy chơi game/<br>Game Console
-                </p>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="#" class="category-item text-decoration-none text-dark">
-                <div class="category-box">
-                    <img src="/images/categories/danh-muc-icon-kinh-thuc-te-ao-vrar-thinkpro.vn.jpg" class="img-fluid mb-2" />
-
-                </div>
-
-                <p class="fw-semibold small">Kính Thực Tế Ảo<br>VR/AR</p>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="#" class="category-item text-decoration-none text-dark">
-                <div class="category-box">
-                    <img src="/images/categories/danh-muc-icon-ban-phim-thinkpro.vn.jpg" class="img-fluid mb-2" />
-
-                </div>
-                <p class="fw-semibold small">Bàn phím</p>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="#" class="category-item text-decoration-none text-dark">
-                <div class="category-box">
-                    <img src="/images/categories/chuot.jpg" class="img-fluid mb-2" />
-
-                </div>
-                <p class="fw-semibold small">Chuột</p>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="#" class="category-item text-decoration-none text-dark">
-                <div class="category-box">
-                    <img src="/images/categories/danh-muc-icon-balo-tui-thinkpro.vn.jpg" class="img-fluid mb-2" />
-
-                </div>
-                <p class="fw-semibold small">Balo, Túi</p>
+                <p th:text="${brand.name}" ></p>
             </a>
         </div>
 
@@ -150,14 +77,17 @@
     <div class="tabs">
         <a th:href="@{/}"
            class="tab"
-           th:classappend="${activeCategory == null} ? 'active'">
+           th:classappend="${activeCategory == null} ? 'active'"
+           style="text-decoration:none">
             Tất cả
         </a>
 
         <a th:each="c : ${categories}"
            th:href="@{/(category=${c.id})}"
            class="tab"
-           th:classappend="${activeCategory == c.id} ? 'active'">
+           th:classappend="${activeCategory == c.id} ? 'active'"
+           style="text-decoration:none"
+           >
             <span th:text="${c.name}"></span>
         </a>
     </div>
