@@ -3,6 +3,8 @@ package com.lamdayne.ecommercelaptop.service;
 import com.lamdayne.ecommercelaptop.dto.request.CreateCartRequest;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateCartRequest;
 import com.lamdayne.ecommercelaptop.dto.response.CartResponse;
+import com.lamdayne.ecommercelaptop.entity.Cart;
+import com.lamdayne.ecommercelaptop.entity.User;
 
 import java.util.List;
 
@@ -14,4 +16,6 @@ public interface CartService {
     List<CartResponse> getAllCarts();
     List<CartResponse> getAllCartsByUserId(String userId);
     CartResponse addToCart(String productId);
+    List<Cart> findByUserId(User user);
+    void deleteProductFromCart(String cartId, String productId);
 }
