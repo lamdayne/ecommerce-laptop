@@ -17,6 +17,7 @@ import com.lamdayne.ecommercelaptop.service.CartService;
 import com.lamdayne.ecommercelaptop.util.SessionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -77,5 +78,16 @@ public class CartServiceImpl implements CartService {
         cart.setProduct(productRepository.findById(productId).orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND)));
         cart.setQuantity(1);
         return cartMapper.toCartResponse(cartRepository.save(cart));
+    }
+
+    @Override
+    public List<Cart> findByUserId(User user) {
+        return cartRepository.findByUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteProductFromCart(String cartId, String productId) {
+        cartRepository.deleteProductFromCart(cartId, productId);
     }
 }
