@@ -34,6 +34,7 @@ private final CategoryService categoryService;
             productPage = productService.getProductsByCategory(categoryId, page, size);
         }
 
+        model.addAttribute("brands", brandService.getAllBrands());
         model.addAttribute("products", productPage.getContent());
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("activeCategory", categoryId);
