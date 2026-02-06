@@ -85,4 +85,12 @@ public class AuthController {
         return "redirect:/auth/my-info";
     }
 
+    @PostMapping("/change-password/{userId}")
+    public String changePassword(@PathVariable("userId") String userId,
+                                 @RequestParam("newPassword") String newPassword
+    ) {
+        userService.changePassword(userId, newPassword);
+        return "redirect:/auth/my-info";
+    }
+
 }
