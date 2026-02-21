@@ -61,9 +61,11 @@ public class AdminUserController {
     public String update(
             @PathVariable String id,
             UpdateUserDTO dto,
+            @RequestParam("role") boolean role,
             RedirectAttributes redirect
     ) {
         userService.updateUser(id, dto);
+        userService.updateUserAdmin(id, role);
         redirect.addFlashAttribute("message", "Cập nhật tài khoản thành công");
         return "redirect:/admin/account";
     }
