@@ -89,4 +89,11 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void updateUserAdmin(String userId, boolean admin) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        user.setRole(admin);
+        userRepository.save(user);
+    }
+
 }

@@ -17,4 +17,5 @@ public interface UserService {
     User getUserByEmail(String email);
     UserResponse updateUser(String userId, UpdateUserDTO userDTO);
     void changePassword(String userId, String newPassword);
+    void updateUserAdmin(String userId, boolean admin);
 }
