@@ -1,6 +1,7 @@
 package com.lamdayne.ecommercelaptop.controller;
 
 
+import com.lamdayne.ecommercelaptop.exception.AppException;
 import com.lamdayne.ecommercelaptop.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,11 @@ public class ProductDetailController {
 
     @GetMapping("/detail/{productId}")
     public String detail(@PathVariable String productId, Model model) {
+        try {
+            productService.getProductById(productId);
+        } catch (AppException e) {
+            return "redirect:/";
+        }
         model.addAttribute("product", productService.getProductById(productId));
         return "detail";
     }

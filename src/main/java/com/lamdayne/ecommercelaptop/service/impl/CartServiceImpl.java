@@ -74,6 +74,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional
     public CartResponse addToCart(String productId) {
 //        Cart cart = new Cart();
 //        cart.setUser((User) sessionUtil.get(SessionConstant.SESSION_USER));

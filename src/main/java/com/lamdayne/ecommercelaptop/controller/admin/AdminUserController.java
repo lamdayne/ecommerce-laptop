@@ -1,9 +1,12 @@
 package com.lamdayne.ecommercelaptop.controller.admin;
 
 
+import com.lamdayne.ecommercelaptop.constant.SessionConstant;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateUserDTO;
 import com.lamdayne.ecommercelaptop.dto.response.UserResponse;
+import com.lamdayne.ecommercelaptop.entity.User;
 import com.lamdayne.ecommercelaptop.service.UserService;
+import com.lamdayne.ecommercelaptop.util.SessionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -22,6 +25,7 @@ import java.util.List;
 public class AdminUserController {
 
     private final UserService userService;
+    private final SessionUtil sessionUtil;
 
     @GetMapping
     public String redirectToList() {
@@ -75,6 +79,11 @@ public class AdminUserController {
             @PathVariable String id,
             RedirectAttributes redirect
     ) {
+        User user = (User) sessionUtil.get(SessionConstant.SESSION_USER);
+        if (user.getId().equals(id)) {
+            redirect.addFlashAttribute("errorMessage", "Không thể xóa tài khoản đang đăng nhập");
+            return "redirect:/admin/account";
+        }
         userService.deleteUser(id);
         redirect.addFlashAttribute("message", "Xóa tài khoản thành công");
         return "redirect:/admin/account";

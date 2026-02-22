@@ -64,4 +64,12 @@ public class OrderServiceImpl implements OrderService {
     public Page<Order> getOrders(Pageable pageable) {
         return orderRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Order> getOrders(Pageable pageable, String orderId) {
+        if (orderId == null || orderId.trim().isEmpty()) {
+            return orderRepository.findAll(pageable);
+        }
+        return orderRepository.findByIdStartingWith(orderId, pageable);
+    }
 }

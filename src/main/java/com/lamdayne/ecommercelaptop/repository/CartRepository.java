@@ -1,6 +1,7 @@
 package com.lamdayne.ecommercelaptop.repository;
 
 import com.lamdayne.ecommercelaptop.entity.Cart;
+import com.lamdayne.ecommercelaptop.entity.Product;
 import com.lamdayne.ecommercelaptop.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,4 +23,8 @@ public interface CartRepository extends JpaRepository<Cart, String> {
     void deleteProductFromCart(@Param("cartId") String cartId, @Param("productId") String productId);
 
     Optional<Cart> findByUserAndProductId(User user, String productId);
+
+    @Modifying
+    @Query("DELETE FROM Cart c WHERE c.product.id = :productId")
+    void deleteByProductId(@Param("productId") String productId);
 }

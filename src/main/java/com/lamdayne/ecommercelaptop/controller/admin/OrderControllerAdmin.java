@@ -35,4 +35,13 @@ public class OrderControllerAdmin {
         return "redirect:/admin/order";
     }
 
+    @PostMapping("/admin/order")
+    public String searchOrder(@RequestParam("ord") String orderId, Model model)  {
+        Pageable pageable = PageRequest.of(0, 8);
+        Page<Order> page = orderService.getOrders(pageable, orderId);
+        model.addAttribute("page", page);
+        model.addAttribute("currentSearch", orderId);
+        return "admin/order/list-order";
+    }
+
 }
