@@ -18,12 +18,12 @@
         </div>
         <div class="card-body p-4">
 
-            <form th:action="@{/auth/register}" method="post">
+            <form th:action="@{/auth/register}" method="post" th:object="${userInfo}">
                 <div class="mb-3">
                     <label class="form-label text-muted small fw-bold">Họ và tên</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="fas fa-user"></i></span>
-                        <input type="text" name="fullName" class="form-control" placeholder="Nhập họ và tên" required>
+                        <input th:field="*{fullName}" type="text" name="fullName" class="form-control" placeholder="Nhập họ và tên" required>
                     </div>
                 </div>
 
@@ -31,7 +31,7 @@
                     <label class="form-label text-muted small fw-bold">Số điện thoại</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="fa-solid fa-phone"></i></span>
-                        <input type="text" name="phone" class="form-control" placeholder="Nhập số điện thoại" required>
+                        <input th:field="*{phone}" type="text" name="phone" class="form-control" placeholder="Nhập số điện thoại" required>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
                     <label class="form-label text-muted small fw-bold">Ngày sinh</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="fa-solid fa-calendar"></i></span>
-                        <input type="date" name="dob" class="form-control" required>
+                        <input th:field="*{dob}" type="date" name="dob" class="form-control" required>
                     </div>
                 </div>
 
@@ -47,7 +47,7 @@
                     <label class="form-label text-muted small fw-bold">Địa chỉ Email</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="fas fa-envelope"></i></span>
-                        <input type="email" name="email" class="form-control" placeholder="Nhập email" required>
+                        <input th:field="*{email}" type="email" name="email" class="form-control" placeholder="Nhập email" required>
                     </div>
                 </div>
 
@@ -55,10 +55,11 @@
                     <label class="form-label text-muted small fw-bold">Mật khẩu</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="fas fa-lock"></i></span>
-                        <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu"
+                        <input th:field="*{password}" type="password" name="password" class="form-control" placeholder="Nhập mật khẩu"
                                required>
                     </div>
                 </div>
+                <div class="alert alert-danger" role="alert" th:if="${message != null}" th:text="${message}"></div>
 
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary btn-register">Đăng Ký Ngay</button>

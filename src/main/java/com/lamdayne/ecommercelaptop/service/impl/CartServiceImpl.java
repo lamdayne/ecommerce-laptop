@@ -15,11 +15,13 @@ import com.lamdayne.ecommercelaptop.repository.ProductRepository;
 import com.lamdayne.ecommercelaptop.repository.UserRepository;
 import com.lamdayne.ecommercelaptop.service.CartService;
 import com.lamdayne.ecommercelaptop.util.SessionUtil;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -73,10 +75,20 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartResponse addToCart(String productId) {
-        Cart cart = new Cart();
-        cart.setUser((User) sessionUtil.get(SessionConstant.SESSION_USER));
-        cart.setProduct(productRepository.findById(productId).orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND)));
-        cart.setQuantity(1);
+//        Cart cart = new Cart();
+//        cart.setUser((User) sessionUtil.get(SessionConstant.SESSION_USER));
+//        cart.setProduct(productRepository.findById(productId).orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND)));
+//        cart.setQuantity(1);
+
+        User user = (User) sessionUtil.get(SessionConstant.SESSION_USER);
+        Cart cart = cartRepository.findByUserAndProductId(user, productId).orElseGet(() -> {
+            Cart newCart = new Cart();
+            newCart.setUser(user);
+            newCart.setProduct(productRepository.findById(productId).get());
+            newCart.setQuantity(0);
+            return newCart;
+        });
+        cart.setQuantity(cart.getQuantity() + 1);
         return cartMapper.toCartResponse(cartRepository.save(cart));
     }
 

@@ -5,6 +5,8 @@ import com.lamdayne.ecommercelaptop.dto.request.CreateUserRequest;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateUserDTO;
 import com.lamdayne.ecommercelaptop.dto.response.UserResponse;
 import com.lamdayne.ecommercelaptop.entity.User;
+import com.lamdayne.ecommercelaptop.exception.AppException;
+import com.lamdayne.ecommercelaptop.exception.ErrorCode;
 import com.lamdayne.ecommercelaptop.mapper.UserMapper;
 import com.lamdayne.ecommercelaptop.service.AuthService;
 import com.lamdayne.ecommercelaptop.service.UserService;
@@ -34,7 +36,7 @@ public class AuthController {
                         @RequestParam String password,
                         RedirectAttributes redirectAttributes
     ) {
-        User user = authService.login(email, password);
+        User user = authService.findByEmail(email);
 
         if (user == null) {
             redirectAttributes.addFlashAttribute("message", "Tài khoản không tồn lại");
@@ -47,19 +49,31 @@ public class AuthController {
 
         String securityUri = (String) session.get(SessionConstant.SECURITY_URI);
         if (securityUri != null) {
+            session.remove(SessionConstant.SECURITY_URI);
             return "redirect:" + securityUri;
         }
         return "redirect:/auth/login";
     }
 
     @GetMapping("/register")
-    public String register(){
+    public String register(Model model) {
+        model.addAttribute("userInfo",  new CreateUserRequest());
         return "/home/register";
     }
 
     @PostMapping("/register")
     public String register(CreateUserRequest userInfo, Model model) {
-        userService.createUser(userInfo);
+        try {
+            userService.createUser(userInfo);
+        } catch (AppException e) {
+//            if (e.getErrorCode() == ErrorCode.PHONE_EXISTS) {
+                model.addAttribute("message", e.getMessage());
+//            } else {
+//
+//            }
+            model.addAttribute("userInfo", userInfo);
+            return "/home/register";
+        }
         return "redirect:/auth/login";
     }
 
