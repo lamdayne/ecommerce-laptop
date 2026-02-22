@@ -18,9 +18,9 @@
 
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body">
-                    <form class="row g-3">
+                    <form class="row g-3" th:action="@{|/admin/order|}" method="post">
                         <div class="col-md-10">
-                            <input type="text" class="form-control" placeholder="Tìm mã đơn">
+                            <input type="text" th:value="${currentSearch}" name="ord" class="form-control" placeholder="Tìm mã đơn">
                         </div>
                         <!--                        <div class="col-md-3">-->
                         <!--                            <select class="form-select">-->
@@ -34,7 +34,7 @@
                         <!--                            <input type="date" class="form-control">-->
                         <!--                        </div>-->
                         <div class="col-md-2">
-                            <button class="btn btn-secondary w-100">Lọc</button>
+                            <button type="submit" class="btn btn-secondary w-100">Lọc</button>
                         </div>
                     </form>
                 </div>
@@ -54,7 +54,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="order : ${page.content}">
-                            <td class="ps-4 fw-bold" th:text="${#strings.substring(order.id, 0, 8)}"></td>
+                            <td class="ps-4 fw-bold" th:text="${order.id}"></td>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <span th:text="${order.user.fullName}"></span>

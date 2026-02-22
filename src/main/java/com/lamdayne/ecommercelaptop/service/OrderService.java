@@ -11,4 +11,5 @@ public interface OrderService {
     Order createOrder(CreateOrderDTO createOrderDTO);
     Order updateOrderStatus(String orderId, Integer orderStatus);
     Page<Order> getOrders(Pageable pageable);
+    Page<Order> getOrders(Pageable pageable, String orderId);
 }

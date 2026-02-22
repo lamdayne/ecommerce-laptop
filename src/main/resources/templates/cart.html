@@ -73,7 +73,7 @@
                             <input type="hidden" name="productId" th:value="${item.product.id}">
                         </td>
                         <td class="text-center">
-                            <strong th:text="${#numbers.formatDecimal(item.product.salePrice, 0, 'POINT', 0, 'COMMA')} + ' đ'"></strong>
+                            <strong th:text="${#numbers.formatDecimal(item.product.salePrice * item.quantity, 0, 'POINT', 0, 'COMMA')} + ' đ'"></strong>
                         </td>
                         <td class="text-center">
                             <form th:action="@{/cart/remove/{id}(id=${item.product.id})}" method="post" style="display:inline;">

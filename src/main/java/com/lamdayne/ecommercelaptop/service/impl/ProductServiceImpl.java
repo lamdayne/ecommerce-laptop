@@ -10,6 +10,7 @@ import com.lamdayne.ecommercelaptop.exception.AppException;
 import com.lamdayne.ecommercelaptop.exception.ErrorCode;
 import com.lamdayne.ecommercelaptop.mapper.ProductMapper;
 import com.lamdayne.ecommercelaptop.repository.BrandRepository;
+import com.lamdayne.ecommercelaptop.repository.CartRepository;
 import com.lamdayne.ecommercelaptop.repository.CategoryRepository;
 import com.lamdayne.ecommercelaptop.repository.ProductRepository;
 import com.lamdayne.ecommercelaptop.service.ProductService;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -33,6 +35,7 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryRepository categoryRepository;
     private final ProductMapper productMapper;
     private final UploadImageFileService uploadImageFileService;
+    private final CartRepository cartRepository;
 
     @Override
     public ProductResponse createProduct(CreateProductRequest request) {
@@ -68,8 +71,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void deleteProduct(String id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
+        cartRepository.deleteByProductId(product.getId());
         productRepository.delete(product);
     }
 
