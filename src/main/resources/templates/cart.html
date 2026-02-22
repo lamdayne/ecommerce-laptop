@@ -40,7 +40,7 @@
 
     <!-- Có sản phẩm -->
     <div th:unless="${cartItems == null or #lists.isEmpty(cartItems)}">
-        <form th:action="@{/cart/update}" method="post">
+<!--        <form th:action="@{/cart/update}" method="post">-->
             <div class="table-responsive">
                 <table class="table cart-table">
                     <thead>
@@ -69,19 +69,19 @@
                         </td>
                         <td class="text-center">
                             <input type="number" name="quantity" th:value="${item.quantity}" min="1"
-                                   class="form-control quantity-input">
+                                   class="form-control quantity-input" readonly>
                             <input type="hidden" name="productId" th:value="${item.product.id}">
                         </td>
                         <td class="text-center">
                             <strong th:text="${#numbers.formatDecimal(item.product.salePrice, 0, 'POINT', 0, 'COMMA')} + ' đ'"></strong>
                         </td>
                         <td class="text-center">
-                            <input name="cartId" th:value="${item.id}" hidden>
-                            <button type="submit"
-                                    th:formaction="@{/cart/remove/{id}(id=${item.product.id})}"
-                                    class="text-white fs-5 btn btn-danger" title="Xóa">
-                                <i class="ri-delete-bin-line"></i>
-                            </button>
+                            <form th:action="@{/cart/remove/{id}(id=${item.product.id})}" method="post" style="display:inline;">
+                                <input name="cartId" th:value="${item.id}" hidden>
+                                <button type="submit" class="text-white fs-5 btn btn-danger" title="Xóa">
+                                    <i class="ri-delete-bin-line"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     </tbody>
@@ -111,7 +111,7 @@
             <!--             onclick="return confirm('Xóa toàn bộ giỏ hàng?')">Xóa giỏ hàng</a>-->
             <!--        </div>-->
             <!--      </div>-->
-        </form>
+<!--        </form>-->
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

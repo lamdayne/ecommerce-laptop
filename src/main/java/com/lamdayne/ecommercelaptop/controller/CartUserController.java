@@ -1,7 +1,6 @@
 package com.lamdayne.ecommercelaptop.controller;
 
 import com.lamdayne.ecommercelaptop.constant.SessionConstant;
-import com.lamdayne.ecommercelaptop.entity.Cart;
 import com.lamdayne.ecommercelaptop.entity.User;
 import com.lamdayne.ecommercelaptop.service.CartService;
 import com.lamdayne.ecommercelaptop.util.SessionUtil;
@@ -30,9 +29,18 @@ public class CartUserController {
         return "cart";
     }
 
+    @GetMapping("/add-to-cart")
+    public String addToCart(Model model) {
+        return "redirect:/";
+    }
+
     @PostMapping("/add-to-cart")
-    public String cartPost(Model model, @RequestParam("productId") String productId) {
+    public String cartPost(Model model,
+                           @RequestParam("productId") String productId,
+                           RedirectAttributes redirectAttributes
+    ) {
         cartService.addToCart(productId);
+        redirectAttributes.addFlashAttribute("addToCart", "Add to cart successfully!");
         return "redirect:/detail/" + productId;
     }
 
@@ -42,6 +50,7 @@ public class CartUserController {
                                      @RequestParam("cartId") String cartId,
                                      RedirectAttributes re
     ) {
+        System.out.println("Remove from cart " + cartId);
         cartService.deleteProductFromCart(cartId, productId);
         User user = (User) sessionUtil.get(SessionConstant.SESSION_USER);
         user.getCarts().removeIf(cart -> cart.getId().equals(cartId));

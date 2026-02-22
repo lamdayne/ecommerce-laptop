@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, String> {
@@ -19,4 +20,6 @@ public interface CartRepository extends JpaRepository<Cart, String> {
     @Modifying
     @Query(value = "DELETE FROM Cart c WHERE c.id = :cartId AND c.product.id = :productId")
     void deleteProductFromCart(@Param("cartId") String cartId, @Param("productId") String productId);
+
+    Optional<Cart> findByUserAndProductId(User user, String productId);
 }

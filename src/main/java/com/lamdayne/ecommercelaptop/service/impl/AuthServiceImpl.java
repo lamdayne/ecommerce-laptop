@@ -19,4 +19,9 @@ public class AuthServiceImpl implements AuthService {
         return userService.getUserByEmail(email);
     }
 
+    @Override
+    public User findByEmail(String email) {
+        return userService.getUserByEmail(email);
+    }
+
 }
