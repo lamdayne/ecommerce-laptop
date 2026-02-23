@@ -79,7 +79,9 @@ public class AuthController {
 
     @GetMapping("/my-info")
     public String myInfo(Model model){
-        model.addAttribute("user", session.get(SessionConstant.SESSION_USER));
+        User user = (User) session.get(SessionConstant.SESSION_USER);
+        model.addAttribute("user", user);
+        model.addAttribute("orders", userService.findById(user.getId()).getOrders());
         return "/home/my-info";
     }
 

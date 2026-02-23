@@ -26,7 +26,8 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold">Họ và tên</label>
-                                <input type="text" name="fullName" class="form-control" th:value="${session.user.fullName}" placeholder="Full Name">
+                                <input type="text" name="fullName" class="form-control"
+                                       th:value="${session.user.fullName}" placeholder="Full Name">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold">Email</label>
@@ -39,7 +40,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold">Ngày sinh</label>
-                                <input type="date" name="dob" class="form-control" th:value="${#dates.format(session.user.dob, 'yyyy-MM-dd')}">
+                                <input type="date" name="dob" class="form-control"
+                                       th:value="${#dates.format(session.user.dob, 'yyyy-MM-dd')}">
                             </div>
                         </div>
                         <hr class="my-4">
@@ -59,22 +61,80 @@
                 </div>
                 <div class="card-body">
                     <form th:action="@{|/auth/change-password/${session.user.id}|}" method="post">
-<!--                        <div class="mb-3">-->
-<!--                            <label class="form-label small fw-bold">Mật khẩu hiện tại</label>-->
-<!--                            <input type="password" class="form-control" placeholder="********">-->
-<!--                        </div>-->
+                        <!--                        <div class="mb-3">-->
+                        <!--                            <label class="form-label small fw-bold">Mật khẩu hiện tại</label>-->
+                        <!--                            <input type="password" class="form-control" placeholder="********">-->
+                        <!--                        </div>-->
                         <div class="mb-3">
                             <label class="form-label small fw-bold">Mật khẩu mới</label>
-                            <input name="newPassword" type="password" class="form-control" placeholder="Nhập mật khẩu mới">
+                            <input name="newPassword" type="password" class="form-control"
+                                   placeholder="Nhập mật khẩu mới">
                         </div>
-<!--                        <div class="mb-3">-->
-<!--                            <label class="form-label small fw-bold">Xác nhận mật khẩu</label>-->
-<!--                            <input type="password" class="form-control" placeholder="Nhập lại mật khẩu mới">-->
-<!--                        </div>-->
+                        <!--                        <div class="mb-3">-->
+                        <!--                            <label class="form-label small fw-bold">Xác nhận mật khẩu</label>-->
+                        <!--                            <input type="password" class="form-control" placeholder="Nhập lại mật khẩu mới">-->
+                        <!--                        </div>-->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-outline-danger">Cập nhật mật khẩu</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-bold text-success">
+                        <i class="bi bi-bag-check-fill"></i>
+                        Lịch sử đơn hàng
+                    </h5>
+                    <span class="badge bg-success rounded-pill" th:text="${orders != null ? orders.size() : 0}">0</span>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="small fw-bold">Mã Đơn</th>
+                                <th scope="col" class="small fw-bold">Ngày Đặt</th>
+                                <th scope="col" class="small fw-bold">Tổng Tiền</th>
+                                <th scope="col" class="small fw-bold">Trạng Thái</th>
+<!--                                <th scope="col" class="small fw-bold text-center">Thao Tác</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="order : ${orders}">
+                                <td class="fw-bold text-dark" th:text="${'#' + order.id}">#12345</td>
+                                <td th:text="${#dates.format(order.createdAt, 'dd/MM/yyyy HH:mm')}">23/02/2026 07:15
+                                </td>
+                                <td class="text-danger fw-bold" th:text="${#numbers.formatInteger(order.getTotalPrice(), 3, 'POINT') + 'đ'}">
+                                    150.000đ
+                                </td>
+                                <td>
+                                    <span th:if="${order.status == 0}" class="badge bg-warning text-dark">Chờ xử lý</span>
+                                    <span th:if="${order.status == 1}" class="badge bg-primary">Đã xác nhận đơn</span>
+                                    <span th:if="${order.status == 2}" class="badge bg-success">Đang vận chuyển</span>
+                                    <span th:if="${order.status == 3}" class="badge bg-success">Giao thành công</span>
+                                    <span th:if="${order.status == 4}" class="badge bg-danger">Đã hủy</span>
+                                </td>
+<!--                                <td class="text-center">-->
+<!--                                    <a th:href="@{|/order/detail/${order.id}|}" class="btn btn-sm btn-outline-primary">-->
+<!--                                        <i class="bi bi-eye"></i> Chi tiết-->
+<!--                                    </a>-->
+<!--                                </td>-->
+                            </tr>
+
+                            <tr th:if="${orders == null || orders.isEmpty()}">
+                                <td colspan="5" class="text-center py-4 text-muted">
+                                    <i class="bi bi-inbox fs-2 d-block mb-2"></i>
+                                    Bạn chưa có đơn hàng nào.
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -18,4 +18,5 @@ public interface UserService {
     UserResponse updateUser(String userId, UpdateUserDTO userDTO);
     void changePassword(String userId, String newPassword);
     void updateUserAdmin(String userId, boolean admin);
+    User findById(String userId);
 }
