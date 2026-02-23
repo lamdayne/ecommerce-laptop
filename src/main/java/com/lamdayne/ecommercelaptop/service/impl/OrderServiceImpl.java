@@ -40,6 +40,9 @@ public class OrderServiceImpl implements OrderService {
         order = orderRepository.save(order);
 
         Product product = productRepository.findById(createOrderDTO.getProductId()).orElse(null);
+        if (product != null) {
+            product.setStock(product.getStock() - 1);
+        }
         OrderDetail orderDetail = new OrderDetail();
         orderDetail.setOrder(order);
         orderDetail.setProduct(product);
