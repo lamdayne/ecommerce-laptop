@@ -146,6 +146,11 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.count();
     }
 
+    @Override
+    public Page<Order> getOrdersByUserId(Pageable pageable, String userId) {
+        return orderRepository.findAllByUserId(userId, pageable);
+    }
+
     private void sendEmail(String subject, String body, String to) {
         EmailService.Mail mail = EmailService.Mail.builder()
                 .from(from)

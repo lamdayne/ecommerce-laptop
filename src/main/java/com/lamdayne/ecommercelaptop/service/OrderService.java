@@ -13,4 +13,5 @@ public interface OrderService {
     Page<Order> getOrders(Pageable pageable);
     Page<Order> getOrders(Pageable pageable, String orderId);
     Long countOrders();
+    Page<Order> getOrdersByUserId(Pageable pageable, String userId);
 }
