@@ -19,4 +19,5 @@ public interface UserService {
     void changePassword(String userId, String newPassword);
     void updateUserAdmin(String userId, boolean admin);
     User findById(String userId);
+    long countUsers();
 }

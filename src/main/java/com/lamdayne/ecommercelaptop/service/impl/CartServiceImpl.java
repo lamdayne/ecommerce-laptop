@@ -103,4 +103,9 @@ public class CartServiceImpl implements CartService {
     public void deleteProductFromCart(String cartId, String productId) {
         cartRepository.deleteProductFromCart(cartId, productId);
     }
+
+    @Override
+    public void clearCartByUserId(String userId, List<String> productIds) {
+        cartRepository.clearCartByUserId(userId, productIds);
+    }
 }

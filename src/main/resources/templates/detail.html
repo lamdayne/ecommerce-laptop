@@ -53,7 +53,9 @@
                 </div>
 
                 <form class="action-buttons" method="post">
-                    <input name="productId" th:value="${productId}" hidden>
+                    <input name="productIds" th:value="${productId}" hidden>
+                    <input name="quantities" th:value="1" hidden>
+                    <input name="fromCart" th:value="false" hidden>
                     <button type="submit" formaction="/checkout" class="btn-buy-now">
                         <strong>MUA NGAY</strong>
                         <span>(Giao hàng tận nơi hoặc lấy tại cửa hàng)</span>

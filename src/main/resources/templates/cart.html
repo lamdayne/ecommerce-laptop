@@ -86,6 +86,14 @@
                     </tr>
                     </tbody>
                 </table>
+                <form th:action="@{|/checkout|}" method="post">
+                    <div th:each="item : ${cartItems}">
+                        <input name="productIds" th:value="${item.product.id}" type="hidden">
+                        <input name="quantities" th:value="${item.quantity}" type="hidden">
+                    </div>
+                    <input name="fromCart" th:value="true" type="hidden">
+                    <button type="submit" class="btn btn-success">Mua ngay</button>
+                </form>
             </div>
 
             <!-- Tổng kết -->

@@ -14,4 +14,5 @@ public interface BrandService {
     BrandResponse getBrandById(int id);
     List<BrandResponse> getAllBrands();
     BrandResponse uploadImageBrand(int id, MultipartFile file) throws IOException;
+    long countBrands();
 }

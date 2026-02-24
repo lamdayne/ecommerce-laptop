@@ -23,4 +23,5 @@ public interface ProductService {
     List<ProductResponse> search(String keyword,Integer brandId,Integer categoryId,Long minPrice,Long maxPrice);
     Page<ProductResponse> getProducts(int page, int size);
     Page<ProductResponse> getProductsByCategory(Integer categoryId, int page, int size);
+    Long countProducts();
 }

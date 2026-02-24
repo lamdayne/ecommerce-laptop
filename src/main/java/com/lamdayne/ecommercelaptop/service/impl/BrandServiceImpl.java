@@ -64,4 +64,9 @@ public class BrandServiceImpl implements BrandService {
         brand.setImageUrl(uploadImageFileService.uploadImageFile(file));
         return brandMapper.toBrandResponse(brandRepository.save(brand));
     }
+
+    @Override
+    public long countBrands() {
+        return brandRepository.count();
+    }
 }

@@ -135,6 +135,7 @@
                         <th>Sản phẩm</th>
                         <th class="text-center">Số lượng</th>
                         <th class="text-end">Thành tiền</th>
+                        <th>Hình ảnh</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -142,6 +143,9 @@
                         <td th:text="${detail.product.name}"></td>
                         <td class="text-center" th:text="${detail.quantity}"></td>
                         <td class="text-end" th:text="${#numbers.formatInteger(detail.price, 3, 'POINT')} + 'đ'"></td>
+                        <td>
+                            <img width="100px" th:src="${detail.product.thumbnail}">
+                        </td>
                     </tr>
                     </tbody>
                     <tfoot>
