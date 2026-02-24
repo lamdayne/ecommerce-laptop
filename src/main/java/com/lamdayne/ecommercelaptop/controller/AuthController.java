@@ -117,4 +117,64 @@ public class AuthController {
         return "redirect:/auth/my-info";
     }
 
+    @GetMapping("/forgot")
+    public String forgotPassword(Model model) {
+        model.addAttribute("isValid", false);
+        return "/forgot-password";
+    }
+
+    @PostMapping("/forgot")
+    public String forgotPassword(@RequestParam String email, Model model) {
+        User user = userService.getUserByEmail(email);
+        if (user == null) {
+            model.addAttribute("message", "Email không tồn tại trong hệ thống");
+            model.addAttribute("isValid", false);
+            return "/forgot-password";
+        }
+        model.addAttribute("isValid", true);
+        model.addAttribute("email", email);
+        authService.forgotPassword(email);
+        return "/forgot-password";
+    }
+
+    @PostMapping("/forgot/confirm")
+    public String forgotPasswordConfirm(@RequestParam String email,
+                                        @RequestParam String otp,
+                                        Model model) {
+        boolean isValid = authService.verifyOtp(email, otp);
+        model.addAttribute("isValid", true);
+        model.addAttribute("email", email);
+        if (!isValid) {
+            model.addAttribute("message", "Mã xác nhận không đúng");
+            return "/forgot-password";
+        }
+        model.addAttribute("userId", userService.getUserByEmail(email).getId());
+        return "/change-password";
+    }
+
+    @PostMapping("/forgot/change/{userId}")
+    public String changePasswordForgot(@RequestParam String email,
+                                       @RequestParam String newPassword,
+                                       @PathVariable String userId,
+                                       Model model) {
+        try {
+            User user = userService.getUserByEmail(email);
+            if (user == null) {
+                return "redirect:/auth/forgot";
+            }
+
+            if (user.getId().equals(userId)) {
+                userService.changePassword(userId, newPassword);
+            } else {
+                model.addAttribute("message", "Email không trùng khớp với userId");
+                model.addAttribute("isValid", true);
+                model.addAttribute("email", email);
+                return "/change-password";
+            }
+        } catch (AppException e) {
+            System.out.println(e.getMessage());
+        }
+        return "redirect:/auth/login";
+    }
+
 }
