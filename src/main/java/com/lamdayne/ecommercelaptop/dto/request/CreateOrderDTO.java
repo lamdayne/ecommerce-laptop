@@ -2,14 +2,17 @@ package com.lamdayne.ecommercelaptop.dto.request;
 
 import lombok.*;
 
+import java.util.List;
+
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateOrderDTO {
-    private Double totalPrice;
     private String address;
-    private String productId;
+    private List<String> productIds;
+    private List<Integer> quantities;
     private String email;
+    private boolean fromCart;
 }

@@ -15,57 +15,57 @@
         <h1 class="h3 mb-0">Trang Quản trị</h1>
     </header>
     <div class="row g-4">
-        <div class="col-lg-3 col-md-6">
-            <a href="/admin/category" class="text-decoration-none">
-                <div class="card h-100 text-center p-4">
-                    <div class="mb-3 text-primary card-icon"><i class="bi bi-tags"></i></div>
-                    <h5 class="card-title">Loại hàng</h5>
-                    <p class="text-muted small">Quản lý danh mục sản phẩm</p>
-                    <div class="fw-bold fs-4 text-primary">Category</div>
-                </div>
-            </a>
-        </div>
+<!--        <div class="col-lg-3 col-md-6">-->
+<!--            <a href="/admin/category" class="text-decoration-none">-->
+<!--                <div class="card h-100 text-center p-4">-->
+<!--                    <div class="mb-3 text-primary card-icon"><i class="bi bi-tags"></i></div>-->
+<!--                    <h5 class="card-title">Loại hàng</h5>-->
+<!--                    <p class="text-muted small">Quản lý danh mục sản phẩm</p>-->
+<!--                    <div class="fw-bold fs-4 text-primary">Category</div>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--        </div>-->
 
         <div class="col-lg-3 col-md-6">
-            <a href="/admin/product" class="text-decoration-none">
+            <a class="text-decoration-none">
                 <div class="card h-100 text-center p-4">
                     <div class="mb-3 text-success card-icon"><i class="bi bi-box-seam"></i></div>
                     <h5 class="card-title">Sản phẩm</h5>
                     <p class="text-muted small">Quản lý sản phẩm, giá, kho</p>
-                    <div class="fw-bold fs-4 text-success">Product</div>
+                    <div class="fw-bold fs-4 text-success" th:text="${product} + ' sản phẩm'"></div>
                 </div>
             </a>
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <a href="/admin/order" class="text-decoration-none">
+            <a class="text-decoration-none">
                 <div class="card h-100 text-center p-4">
                     <div class="mb-3 text-warning card-icon"><i class="bi bi-cart-check"></i></div>
                     <h5 class="card-title">Đơn hàng</h5>
                     <p class="text-muted small">Xem, cập nhật trạng thái đơn</p>
-                    <div class="fw-bold fs-4 text-warning">Order</div>
+                    <div class="fw-bold fs-4 text-warning" th:text="${order} + ' đơn hàng'"></div>
                 </div>
             </a>
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <a href="/admin/brand" class="text-decoration-none">
+            <a class="text-decoration-none">
                 <div class="card h-100 text-center p-4">
                     <div class="mb-3 text-info card-icon"><i class="bi bi-building"></i></div>
                     <h5 class="card-title">Thương hiệu</h5>
                     <p class="text-muted small">Quản lý cửa hàng, kho chi nhánh</p>
-                    <div class="fw-bold fs-4 text-info">Brand</div>
+                    <div class="fw-bold fs-4 text-info" th:text="${brand} + ' thương hiệu'"></div>
                 </div>
             </a>
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <a href="/admin/account" class="text-decoration-none">
+            <a class="text-decoration-none">
                 <div class="card h-100 text-center p-4">
                     <div class="mb-3 text-danger card-icon"><i class="bi bi-people"></i></div>
                     <h5 class="card-title">Tài khoản</h5>
                     <p class="text-muted small">Quản lý khách hàng & nhân viên</p>
-                    <div class="fw-bold fs-4 text-danger">Account</div>
+                    <div class="fw-bold fs-4 text-danger" th:text="${user} + ' người dùng'"></div>
                 </div>
             </a>
         </div>

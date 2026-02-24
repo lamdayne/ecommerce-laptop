@@ -101,4 +101,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
     }
 
+    @Override
+    public long countUsers() {
+        return userRepository.count();
+    }
+
 }

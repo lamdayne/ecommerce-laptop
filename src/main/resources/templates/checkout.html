@@ -24,18 +24,21 @@
                 <label for="exampleFormControlTextarea1" class="form-label">Địa chỉ</label>
                 <textarea name="address" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
-            <input name="productId" th:value="${product.id}" hidden>
-            <input name="totalPrice" th:value="${product.salePrice}" hidden>
+            <div th:each="product, i : ${products}">
+                <input name="productIds" th:value="${product.id}" hidden>
+                <input name="quantities" th:value="${quantities[i.index]}" hidden>
+            </div>
+            <input name="fromCart" th:value="${fromCart}" hidden>
         </div>
         <div class="col-4">
             <ul class="list-group mb-3 shadow-sm">
-                <li class="list-group-item d-flex justify-content-between lh-sm p-3">
+                <li th:each="product, i : ${products}" class="list-group-item d-flex justify-content-between lh-sm p-3">
                     <div class="d-flex align-items-center">
                         <img th:src="${product.thumbnail}" alt="Product" class="rounded me-3 border" style="width: 60px; height: 60px; object-fit: cover;">
                         <div>
                             <h6 class="my-0" th:text="${product.name}"></h6>
                             <small class="text-muted"></small>
-                            <div class="small text-muted">Số lượng: 1</div>
+                            <div class="small text-muted" th:text="'Số lượng: ' + ${quantities[i.index]}"></div>
                         </div>
                     </div>
                     <span class="text-muted" th:text="${#numbers.formatInteger(product.salePrice, 3, 'POINT') + 'đ'}"></span>
@@ -43,7 +46,7 @@
 
                 <li class="list-group-item d-flex justify-content-between p-3">
                     <strong>Tổng cộng (VNĐ)</strong>
-                    <strong class="text-primary fs-5" th:text="${#numbers.formatInteger(product.salePrice, 3, 'POINT') + 'đ'}"></strong>
+                    <strong class="text-primary fs-5" th:text="${#numbers.formatInteger(totalPrice, 3, 'POINT') + 'đ'}"></strong>
                 </li>
             </ul>
         </div>

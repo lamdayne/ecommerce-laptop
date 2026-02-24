@@ -18,4 +18,5 @@ public interface CartService {
     CartResponse addToCart(String productId);
     List<Cart> findByUserId(User user);
     void deleteProductFromCart(String cartId, String productId);
+    void clearCartByUserId(String userId, List<String> productIds);
 }
