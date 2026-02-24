@@ -30,8 +30,8 @@ public class OrderControllerAdmin {
     }
 
     @PostMapping("/admin/order/{orderId}/update-status")
-    public String updateStatus(@PathVariable("orderId") String orderId) {
-        orderService.updateOrderStatus(orderId, 1);
+    public String updateStatus(@PathVariable("orderId") String orderId, @RequestParam("status") String status) {
+        orderService.updateOrderStatus(orderId, Integer.valueOf(status));
         return "redirect:/admin/order";
     }
 
