@@ -4,14 +4,19 @@ import com.lamdayne.ecommercelaptop.constant.SessionConstant;
 import com.lamdayne.ecommercelaptop.dto.request.CreateUserRequest;
 import com.lamdayne.ecommercelaptop.dto.request.UpdateUserDTO;
 import com.lamdayne.ecommercelaptop.dto.response.UserResponse;
+import com.lamdayne.ecommercelaptop.entity.Order;
 import com.lamdayne.ecommercelaptop.entity.User;
 import com.lamdayne.ecommercelaptop.exception.AppException;
 import com.lamdayne.ecommercelaptop.exception.ErrorCode;
 import com.lamdayne.ecommercelaptop.mapper.UserMapper;
 import com.lamdayne.ecommercelaptop.service.AuthService;
+import com.lamdayne.ecommercelaptop.service.OrderService;
 import com.lamdayne.ecommercelaptop.service.UserService;
 import com.lamdayne.ecommercelaptop.util.SessionUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +30,7 @@ public class AuthController {
     private final UserService userService;
     private final SessionUtil session;
     private final AuthService authService;
+    private final OrderService orderService;
 
     @GetMapping("/login")
     public String login(){
@@ -78,10 +84,12 @@ public class AuthController {
     }
 
     @GetMapping("/my-info")
-    public String myInfo(Model model){
+    public String myInfo(Model model, @RequestParam(value = "page", defaultValue = "1") Integer page){
         User user = (User) session.get(SessionConstant.SESSION_USER);
         model.addAttribute("user", user);
-        model.addAttribute("orders", userService.findById(user.getId()).getOrders());
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<Order> pageOrders = orderService.getOrdersByUserId(pageable, user.getId());
+        model.addAttribute("page", pageOrders);
         return "/home/my-info";
     }
 
@@ -107,6 +115,66 @@ public class AuthController {
     ) {
         userService.changePassword(userId, newPassword);
         return "redirect:/auth/my-info";
+    }
+
+    @GetMapping("/forgot")
+    public String forgotPassword(Model model) {
+        model.addAttribute("isValid", false);
+        return "/forgot-password";
+    }
+
+    @PostMapping("/forgot")
+    public String forgotPassword(@RequestParam String email, Model model) {
+        User user = userService.getUserByEmail(email);
+        if (user == null) {
+            model.addAttribute("message", "Email không tồn tại trong hệ thống");
+            model.addAttribute("isValid", false);
+            return "/forgot-password";
+        }
+        model.addAttribute("isValid", true);
+        model.addAttribute("email", email);
+        authService.forgotPassword(email);
+        return "/forgot-password";
+    }
+
+    @PostMapping("/forgot/confirm")
+    public String forgotPasswordConfirm(@RequestParam String email,
+                                        @RequestParam String otp,
+                                        Model model) {
+        boolean isValid = authService.verifyOtp(email, otp);
+        model.addAttribute("isValid", true);
+        model.addAttribute("email", email);
+        if (!isValid) {
+            model.addAttribute("message", "Mã xác nhận không đúng");
+            return "/forgot-password";
+        }
+        model.addAttribute("userId", userService.getUserByEmail(email).getId());
+        return "/change-password";
+    }
+
+    @PostMapping("/forgot/change/{userId}")
+    public String changePasswordForgot(@RequestParam String email,
+                                       @RequestParam String newPassword,
+                                       @PathVariable String userId,
+                                       Model model) {
+        try {
+            User user = userService.getUserByEmail(email);
+            if (user == null) {
+                return "redirect:/auth/forgot";
+            }
+
+            if (user.getId().equals(userId)) {
+                userService.changePassword(userId, newPassword);
+            } else {
+                model.addAttribute("message", "Email không trùng khớp với userId");
+                model.addAttribute("isValid", true);
+                model.addAttribute("email", email);
+                return "/change-password";
+            }
+        } catch (AppException e) {
+            System.out.println(e.getMessage());
+        }
+        return "redirect:/auth/login";
     }
 
 }

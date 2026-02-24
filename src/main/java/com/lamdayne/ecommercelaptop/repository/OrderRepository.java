@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrderRepository extends JpaRepository<Order, String> {
     Page<Order> findByIdStartingWith(String orderId, Pageable pageable);
+    Page<Order> findAllByUserId(String userId, Pageable pageable);
 }

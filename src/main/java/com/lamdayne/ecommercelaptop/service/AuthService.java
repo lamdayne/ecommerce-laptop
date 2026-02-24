@@ -5,4 +5,6 @@ import com.lamdayne.ecommercelaptop.entity.User;
 public interface AuthService {
     User login(String email, String password);
     User findByEmail(String email);
+    void forgotPassword(String email);
+    boolean verifyOtp(String email, String otp);
 }
