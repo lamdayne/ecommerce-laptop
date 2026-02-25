@@ -7,6 +7,7 @@ import com.lamdayne.ecommercelaptop.service.CategoryService;
 import com.lamdayne.ecommercelaptop.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,9 +55,17 @@ private final CategoryService categoryService;
                        @RequestParam(required = false) Integer categoryId,
                        @RequestParam(required = false) Long minPrice,
                        @RequestParam(required = false) Long maxPrice,
+                       @RequestParam(required = false) String sort,
                        Model model
     ) {
-        model.addAttribute("products", productService.search(keyword, brandId, categoryId, minPrice, maxPrice));
+        Sort sortOption = Sort.unsorted();
+
+        if ("price_desc".equals(sort)) {
+            sortOption = Sort.by(Sort.Direction.DESC, "salePrice");
+        } else if ("price_asc".equals(sort)) {
+            sortOption = Sort.by(Sort.Direction.ASC, "salePrice");
+        }
+        model.addAttribute("products", productService.search(keyword, brandId, categoryId, minPrice, maxPrice,sortOption));
         model.addAttribute("categories",categoryService.getAllCategories());
         model.addAttribute("brands", brandService.getAllBrands());
         model.addAttribute("keyword", keyword);
@@ -64,6 +73,7 @@ private final CategoryService categoryService;
         model.addAttribute("categoryId", categoryId);
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);
+        model.addAttribute("sort", sort);
 
         return "home/researchProducts";
     }

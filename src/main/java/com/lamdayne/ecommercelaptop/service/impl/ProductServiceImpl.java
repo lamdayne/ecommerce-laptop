@@ -19,6 +19,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -112,10 +114,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> search(String keyword, Integer brandId, Integer categoryId, Long minPrice , Long maxPrice) {
+    public List<ProductResponse> search(String keyword, Integer brandId, Integer categoryId, Long minPrice , Long maxPrice, Sort sort) {
+
+
+
         if (minPrice == null) minPrice = 0L;
         if (maxPrice == null) maxPrice = Long.MAX_VALUE;
-        return productMapper.toProductResponse(productRepository.search(keyword == null|| keyword.isBlank() ? "null" : keyword, brandId, categoryId, minPrice, maxPrice));
+        return productMapper.toProductResponse(productRepository.search(keyword == null|| keyword.isBlank() ? "null" : keyword, brandId, categoryId, minPrice, maxPrice, sort));
     }
 
     @Override

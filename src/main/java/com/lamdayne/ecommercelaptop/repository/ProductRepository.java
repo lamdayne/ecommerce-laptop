@@ -3,6 +3,7 @@ package com.lamdayne.ecommercelaptop.repository;
 import com.lamdayne.ecommercelaptop.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,7 +33,8 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             @Param("brandId") Integer brandId,
             @Param("categoryId") Integer categoryId,
             @Param("minPrice") Long minPrice,
-            @Param("maxPrice") Long maxPrice
+            @Param("maxPrice") Long maxPrice,
+            @Param("sort") Sort sort
     );
     Page<Product> findAll(Pageable pageable);
 
