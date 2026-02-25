@@ -30,10 +30,23 @@
 
         <div class="col-md-3 mb-4">
             <form th:action="@{/searchproducts}" method="get" class="card p-3 shadow-sm">
+
+
                 <input type="hidden" name="keyword" th:value="${keyword}"/>
 
                 <h6 class="fw-semibold mb-3">Lọc theo giá</h6>
 
+                <select name="sort" class="form-select">
+                    <option value="">-- Sắp xếp --</option>
+                    <option value="price_asc"
+                            th:selected="${sort == 'price_asc'}">
+                        Giá tăng dần
+                    </option>
+                    <option value="price_desc"
+                            th:selected="${sort == 'price_desc'}">
+                        Giá giảm dần
+                    </option>
+                </select>
                 <div class="mb-2">
                     <label class="form-label">Giá từ</label>
                     <input type="number" class="form-control"
