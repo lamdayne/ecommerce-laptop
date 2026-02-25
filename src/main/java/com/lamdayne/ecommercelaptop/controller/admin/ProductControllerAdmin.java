@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,10 +47,16 @@ public class ProductControllerAdmin {
     }
 
     @GetMapping("/list")
-    public String listProduct(Model model, @RequestParam(value = "page", defaultValue = "1") Integer page) {
-        Pageable pageable = PageRequest.of(page - 1, 4);
+    public String listProduct(Model model,
+                              @RequestParam(value = "page", defaultValue = "1") Integer page,
+                              @RequestParam(value = "sortBy", defaultValue = "salePrice") String field,
+                              @RequestParam(value = "sortDir", defaultValue = "asc") String dir) {
+        Sort sort = dir.equalsIgnoreCase("desc") ? Sort.by(field).descending() : Sort.by(field).ascending();
+        Pageable pageable = PageRequest.of(page - 1, 4, sort);
         Page<Product> productPage = productRepository.findAll(pageable);
         model.addAttribute("page", productPage);
+        model.addAttribute("sortBy", field);
+        model.addAttribute("sortDir", dir.equals("asc") ? "desc" : "asc");
         return "/admin/product/product-list";
     }
 

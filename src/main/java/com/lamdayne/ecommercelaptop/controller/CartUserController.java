@@ -36,7 +36,7 @@ public class CartUserController {
 
     @PostMapping("/add-to-cart")
     public String cartPost(Model model,
-                           @RequestParam("productId") String productId,
+                           @RequestParam("productIds") String productId,
                            RedirectAttributes redirectAttributes
     ) {
         cartService.addToCart(productId);
